@@ -1,25 +1,37 @@
-import React, { useState } from 'react';
-import './SelectForm.scss'
-import getInfo from '../../helpers/getInfo'
-import Select from 'react-select';
+import React, { useState } from "react";
+import "./SelectForm.scss";
+import getInfo from "../../helpers/getInfo";
+import Select from "react-select";
 
 const options = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' },
+  { value: "arts_and_literature", label: "Arts & Literature" },
+  { value: "film_and_tv", label: "Film & TV" },
+  { value: "food_and_drink", label: "Food & Drink" },
+  { value: "general_knowledge", label: "General Knowledge" },
+  { value: "geography", label: "History" },
+  { value: "music", label: "Music" },
+  { value: "science", label: "Science" },
+  { value: "society_and_culture", label: "Society & Culture" },
+  { value: "sports_and_leisure", label: "Sports & Leisure" },
 ];
 
-export default function SelectForm () {
+// Involved with selecting the category and calling for questions
+export default function SelectForm() {
   const [selectedOption, setSelectedOption] = useState(null);
-  console.log(selectedOption);
-  
+
+  function handleSubmit (e) {
+    e.preventDefault();
+    getInfo(selectedOption.value);
+  }
+
   return (
-    <div className="select-form">
+    <form className="select-form" onSubmit={handleSubmit}>
       <Select
         defaultValue={selectedOption}
         onChange={setSelectedOption}
         options={options}
       />
-    </div>
-  )
+      <button type="submit">Submit</button>
+    </form>
+  );
 }
