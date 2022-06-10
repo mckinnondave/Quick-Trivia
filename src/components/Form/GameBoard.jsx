@@ -21,12 +21,18 @@ export default function GameBoard({questions}) {
   return (
     <div className="board">
       <div className="board-container">
-        <button onClick={handleClick}>Start!</button>
-        {thisQuestion}
-        <button value={answers[0]}>{answers[0]}</button>
-        <button value={answers[1]}>{answers[1]}</button>
-        <button value={answers[2]}>{answers[2]}</button>
-        <button value={answers[3]}>{answers[3]}</button>
+        <div className="board-start">
+          <button onClick={handleClick}>Start!</button>
+        </div>
+        <div className='board-question'>
+          {thisQuestion}
+        </div>
+        <div className="board-btns">
+          <button value={answers[0]}>{answers[0]}</button>
+          <button value={answers[1]}>{answers[1]}</button>
+          <button value={answers[2]}>{answers[2]}</button>
+          <button value={answers[3]}>{answers[3]}</button>
+        </div>
       </div>
     </div>
   );

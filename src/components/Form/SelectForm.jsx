@@ -54,7 +54,7 @@ export default function SelectForm() {
       <form className="select-form">
         <div className="select-form-container">
           <div className="select-form-name">
-            Feeling smart? Pick a category and see how you do. Good luck!
+            Feeling smart? Well then, select a category and prove it!
           </div>
           <div className="select-form-selector">
             <Select
