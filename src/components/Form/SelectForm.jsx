@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import axios from "axios"
+import axios from "axios";
 import "./SelectForm.scss";
 import Select from "react-select";
+import GameBoard from "./GameBoard";
 
 const options = [
   { value: "arts_and_literature", label: "Arts & Literature" },
@@ -19,8 +20,13 @@ const options = [
 // Involved with selecting the category and calling for questions
 export default function SelectForm() {
   const [selectedOption, setSelectedOption] = useState(null);
-  const [questions, setQuestions] = useState([])
-  console.log("RESULTS", questions)
+  const [questions, setQuestions] = useState([]);
+
+  // Prevent refresh and uses getInfo function to find questions
+  function handleClick(e) {
+    e.preventDefault();
+    getInfo(selectedOption.value);
+  }
 
   // Takes selected category from form and finds questions after submit button is clicked
   const getInfo = (category) => {
@@ -36,27 +42,25 @@ export default function SelectForm() {
     axios
       .request(options)
       .then(function (response) {
-        setQuestions(response.data)
+        setQuestions(response.data);
       })
       .catch(function (error) {
         console.error(error);
       });
   };
 
-  // Prevent refresh and uses getInfo function to find questions
-  function handleClick(e) {
-    e.preventDefault();
-    getInfo(selectedOption.value)
-  }
-
   return (
-    <form className="select-form" >
-      <Select
-        defaultValue={selectedOption}
-        onChange={setSelectedOption}
-        options={options}
-      />
-      <button onClick={handleClick}>Submit</button>
-    </form>
+    <>
+      <form className="select-form">
+        Form
+        <Select
+          defaultValue={selectedOption}
+          onChange={setSelectedOption}
+          options={options}
+        />
+        <button onClick={handleClick}>Submit</button>
+      </form>
+      <GameBoard questions={questions} />
+    </>
   );
 }
