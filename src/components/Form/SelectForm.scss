@@ -3,4 +3,41 @@
   border: solid black 1px;
   height: 300px;
   width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 95%;
+    height:95%;
+  }
+
+  &-name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30%
+  }
+
+  &-selector {
+    width: 90%;
+  }
+
+  &-btn {
+    width: 40%;
+    height: 20%;
+    background: none;
+    border: solid rgb(180, 180, 180) 1px;
+    border-radius: 6px;
+    margin-top: 70px;
+
+    &:hover {
+      background-color: rgb(170, 170, 170);
+      cursor: pointer;
+      border: solid black 1px;
+    }
+  }
 }

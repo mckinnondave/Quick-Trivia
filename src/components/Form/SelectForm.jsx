@@ -52,13 +52,21 @@ export default function SelectForm() {
   return (
     <>
       <form className="select-form">
-        Form
-        <Select
-          defaultValue={selectedOption}
-          onChange={setSelectedOption}
-          options={options}
-        />
-        <button onClick={handleClick}>Submit</button>
+        <div className="select-form-container">
+          <div className="select-form-name">
+            Feeling smart? Pick a category and see how you do. Good luck!
+          </div>
+          <div className="select-form-selector">
+            <Select
+              defaultValue={selectedOption}
+              onChange={setSelectedOption}
+              options={options}
+            />
+          </div>
+          <button className="select-form-btn" onClick={handleClick}>
+            Submit
+          </button>
+        </div>
       </form>
       <GameBoard questions={questions} />
     </>
