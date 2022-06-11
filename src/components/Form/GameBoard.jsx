@@ -14,10 +14,6 @@ export default function GameBoard({questions}) {
   }
   console.log("ANSWERS", answers)
 
-  const checkCorrect = () => {
-
-  }
-
   return (
     <div className="board">
       <div className="board-container">
