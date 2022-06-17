@@ -3,13 +3,13 @@ import './GameBoard.scss'
 import sortQuestion from '../../helpers/Sorting';
 
 export default function GameBoard({questions}) {
-  const [thisQuestion, setThisQuestion] = useState("")
+  const [currentQuestion, setCurrentQuestion] = useState("")
   const [answers, setAnswers] = useState([])
   console.log("QUESTIONS", questions)
 
   const handleClick = (e) => {
     e.preventDefault();
-    setThisQuestion(questions[0].question)
+    setCurrentQuestion(questions[0].question)
     setAnswers(sortQuestion(questions[0]))
   }
   console.log("ANSWERS", answers)
@@ -21,7 +21,7 @@ export default function GameBoard({questions}) {
           <button onClick={handleClick}>Start!</button>
         </div>
         <div className='board-question'>
-          {thisQuestion}
+          {currentQuestion}
         </div>
         <div className="board-btns">
           <button value={answers[0]}>{answers[0]}</button>

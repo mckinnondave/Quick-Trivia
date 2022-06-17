@@ -25,11 +25,11 @@ export default function SelectForm() {
   // Prevent refresh and uses getInfo function to find questions
   function handleClick(e) {
     e.preventDefault();
-    getInfo(selectedOption.value);
+    getListOfQuestions(selectedOption.value);
   }
 
   // Takes selected category from form and finds questions after submit button is clicked
-  const getInfo = (category) => {
+  const getListOfQuestions = (category) => {
     const options = {
       method: "GET",
       url: "https://trivia8.p.rapidapi.com/questions",
@@ -42,6 +42,7 @@ export default function SelectForm() {
     axios
       .request(options)
       .then(function (response) {
+        console.log("DATA", response.data);
         setQuestions(response.data);
       })
       .catch(function (error) {
