@@ -9,15 +9,15 @@ export default function GameBoard({questions}) {
   const [falseAnswerSelected, setFalseAnswerSelected] = useState(false)
   const [hideButton, setHideButton] = useState(false)
 
+  // Array of 10 questions
+  let myQuestions = questions;
+
   const handleClick = (e) => {
     e.preventDefault();
     setHideButton(true)
     setCurrentQuestion(questions[0].question)
     setAnswers(sortQuestion(questions[0]))
   }
-
-  const setCorrectColor = correctAnswerSelected ? "right-answer" : "";
-  const setFalseColor = falseAnswerSelected ? "wrong-answer" : "";
 
   const handleAnswer = (value) => {
     if (value === questions[0].correctAnswer) {
@@ -30,7 +30,12 @@ export default function GameBoard({questions}) {
       setFalseAnswerSelected(true);
       setCurrentQuestion(`Incorrect. The answer is "${questions[0].correctAnswer}"`)
     }
+    myQuestions.length > 0 ? myQuestions.shift() : setCurrentQuestion("Out of Questions");
+      console.log("QQQQQQQ", myQuestions);
   }
+
+  const setCorrectColor = correctAnswerSelected ? "right-answer" : "";
+  const setFalseColor = falseAnswerSelected ? "wrong-answer" : "";
 
   return (
     <div className={`board ${setCorrectColor} ${setFalseColor}`}>

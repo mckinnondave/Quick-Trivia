@@ -22,13 +22,13 @@ export default function SelectForm() {
   const [selectedOption, setSelectedOption] = useState(null);
   const [questions, setQuestions] = useState([]);
   const [isFormHidden, setIsFormHidden] = useState(false)
-  const [isGameHidden, setIsGameHidden] = useState(false)
 
   // Prevent refresh and uses getInfo function to find questions
   function handleClick(e) {
     e.preventDefault();
     getListOfQuestions(selectedOption.value);
     setIsFormHidden(true);
+    console.log("a")
   }
 
   // Takes selected category from form and finds questions after submit button is clicked
@@ -54,10 +54,10 @@ export default function SelectForm() {
   };
 
   const hideForm = isFormHidden ? "select-form-hide" : "";
-  const showGame = isGameHidden ? "board-show" : "";
 
   return (
     <>
+      
       <form className= {`select-form ${hideForm}`}>
         <div className="select-form-container">
           <div className="select-form-name">
