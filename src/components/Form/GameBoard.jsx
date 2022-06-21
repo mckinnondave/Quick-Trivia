@@ -5,17 +5,33 @@ import sortQuestion from '../../helpers/Sorting';
 export default function GameBoard({questions}) {
   const [currentQuestion, setCurrentQuestion] = useState("")
   const [answers, setAnswers] = useState([])
-  console.log("QUESTIONS", questions)
+  const [correctAnswerSelected, setCorrectAnswerSelected] = useState(false)
+  const [falseAnswerSelected, setFalseAnswerSelected] = useState(false)
 
   const handleClick = (e) => {
     e.preventDefault();
     setCurrentQuestion(questions[0].question)
     setAnswers(sortQuestion(questions[0]))
   }
-  console.log("ANSWERS", answers)
+
+  const setCorrectColor = correctAnswerSelected ? "right-answer" : "";
+  const setFalseColor = falseAnswerSelected ? "wrong-answer" : "";
+
+  const handleAnswer = (value) => {
+    if (value === questions[0].correctAnswer) {
+      console.log("RIGHT!");
+      setCorrectAnswerSelected(true);
+      setCurrentQuestion("Correct!")
+    }
+    if (value !== questions[0].correctAnswer) {
+      console.log("WRONG");
+      setFalseAnswerSelected(true);
+      setCurrentQuestion("Wrong :(")
+    }
+  }
 
   return (
-    <div className="board">
+    <div className={`board ${setCorrectColor} ${setFalseColor}`}>
       <div className="board-container">
         <div className="board-start">
           <button onClick={handleClick}>Start!</button>
@@ -24,10 +40,10 @@ export default function GameBoard({questions}) {
           {currentQuestion}
         </div>
         <div className="board-btns">
-          <button value={answers[0]}>{answers[0]}</button>
-          <button value={answers[1]}>{answers[1]}</button>
-          <button value={answers[2]}>{answers[2]}</button>
-          <button value={answers[3]}>{answers[3]}</button>
+          <button onClick={() => handleAnswer(answers[0])}>{answers[0]}</button>
+          <button onClick={() => handleAnswer(answers[1])}>{answers[1]}</button>
+          <button onClick={() => handleAnswer(answers[2])}>{answers[2]}</button>
+          <button onClick={() => handleAnswer(answers[3])}>{answers[3]}</button>
         </div>
       </div>
     </div>
