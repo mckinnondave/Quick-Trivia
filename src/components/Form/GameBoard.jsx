@@ -7,9 +7,11 @@ export default function GameBoard({questions}) {
   const [answers, setAnswers] = useState([])
   const [correctAnswerSelected, setCorrectAnswerSelected] = useState(false)
   const [falseAnswerSelected, setFalseAnswerSelected] = useState(false)
+  const [hideButton, setHideButton] = useState(false)
 
   const handleClick = (e) => {
     e.preventDefault();
+    setHideButton(true)
     setCurrentQuestion(questions[0].question)
     setAnswers(sortQuestion(questions[0]))
   }
@@ -21,30 +23,41 @@ export default function GameBoard({questions}) {
     if (value === questions[0].correctAnswer) {
       console.log("RIGHT!");
       setCorrectAnswerSelected(true);
-      setCurrentQuestion("Correct!")
+      setCurrentQuestion(`CORRECT! The answer is "${questions[0].correctAnswer}!"`)
     }
     if (value !== questions[0].correctAnswer) {
       console.log("WRONG");
       setFalseAnswerSelected(true);
-      setCurrentQuestion("Wrong :(")
+      setCurrentQuestion(`Incorrect. The answer is "${questions[0].correctAnswer}"`)
     }
   }
 
   return (
     <div className={`board ${setCorrectColor} ${setFalseColor}`}>
       <div className="board-container">
-        <div className="board-start">
-          <button onClick={handleClick}>Start!</button>
-        </div>
-        <div className='board-question'>
-          {currentQuestion}
-        </div>
-        <div className="board-btns">
-          <button onClick={() => handleAnswer(answers[0])}>{answers[0]}</button>
-          <button onClick={() => handleAnswer(answers[1])}>{answers[1]}</button>
-          <button onClick={() => handleAnswer(answers[2])}>{answers[2]}</button>
-          <button onClick={() => handleAnswer(answers[3])}>{answers[3]}</button>
-        </div>
+        {!hideButton ? (
+          <div className="board-start">
+            <button onClick={handleClick}>Begin!</button>
+          </div>
+        ) : (
+          <>
+            <div className="board-question">{currentQuestion}</div>
+            <div className="board-btns">
+              <button onClick={() => handleAnswer(answers[0])}>
+                {answers[0]}
+              </button>
+              <button onClick={() => handleAnswer(answers[1])}>
+                {answers[1]}
+              </button>
+              <button onClick={() => handleAnswer(answers[2])}>
+                {answers[2]}
+              </button>
+              <button onClick={() => handleAnswer(answers[3])}>
+                {answers[3]}
+              </button>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

@@ -21,11 +21,14 @@ const options = [
 export default function SelectForm() {
   const [selectedOption, setSelectedOption] = useState(null);
   const [questions, setQuestions] = useState([]);
+  const [isFormHidden, setIsFormHidden] = useState(false)
+  const [isGameHidden, setIsGameHidden] = useState(false)
 
   // Prevent refresh and uses getInfo function to find questions
   function handleClick(e) {
     e.preventDefault();
     getListOfQuestions(selectedOption.value);
+    setIsFormHidden(true);
   }
 
   // Takes selected category from form and finds questions after submit button is clicked
@@ -50,9 +53,12 @@ export default function SelectForm() {
       });
   };
 
+  const hideForm = isFormHidden ? "select-form-hide" : "";
+  const showGame = isGameHidden ? "board-show" : "";
+
   return (
     <>
-      <form className="select-form">
+      <form className= {`select-form ${hideForm}`}>
         <div className="select-form-container">
           <div className="select-form-name">
             Feeling smart? Well then, select a category and prove it!
@@ -65,7 +71,7 @@ export default function SelectForm() {
             />
           </div>
           <button className="select-form-btn" onClick={handleClick}>
-            Submit
+            Select
           </button>
         </div>
       </form>
