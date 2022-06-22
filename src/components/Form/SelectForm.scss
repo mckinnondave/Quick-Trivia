@@ -6,6 +6,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: rgb(231, 231, 231);
 
   &-hide {
     display: none;
@@ -23,7 +24,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 30%
+    height: 30%;
+    text-align: center;
   }
 
   &-selector {

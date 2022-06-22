@@ -4,7 +4,7 @@ import SelectForm from "./components/Form/SelectForm";
 function App() {
 
   return (
-    <SelectForm />
+    <SelectForm />  
   )
 }
 

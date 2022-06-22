@@ -61,7 +61,9 @@ export default function SelectForm() {
         <form className={`select-form ${hideForm}`}>
           <div className="select-form-container">
             <div className="select-form-name">
-              Feeling smart? Well then, select a category and prove it!
+              Feeling smart? Prove it! 
+              <br /> 
+              Select a category and click Begin!
             </div>
             <div className="select-form-selector">
               <Select
@@ -71,7 +73,7 @@ export default function SelectForm() {
               />
             </div>
             <button className="select-form-btn" onClick={handleClick}>
-              Select
+              Begin!
             </button>
           </div>
         </form>

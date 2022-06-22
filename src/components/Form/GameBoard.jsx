@@ -1,27 +1,27 @@
-import React, {useState} from 'react';
-import './GameBoard.scss'
-import sortQuestion from '../../helpers/Sorting';
-import 'animate.css';
+import React, { useState } from "react";
+import "./GameBoard.scss";
+import sortQuestion from "../../helpers/Sorting";
+import "animate.css";
 
-export default function GameBoard({questions}) {
-  const [currentQuestion, setCurrentQuestion] = useState("")
-  const [answers, setAnswers] = useState([])
-  const [correctAnswerSelected, setCorrectAnswerSelected] = useState(false)
-  const [falseAnswerSelected, setFalseAnswerSelected] = useState(false)
-  const [hideButton, setHideButton] = useState(false)
+export default function GameBoard({ questions }) {
+  const [currentQuestion, setCurrentQuestion] = useState("");
+  const [answers, setAnswers] = useState([]);
+  const [correctAnswerSelected, setCorrectAnswerSelected] = useState(false);
+  const [falseAnswerSelected, setFalseAnswerSelected] = useState(false);
+  const [hideButton, setHideButton] = useState(false);
 
   // Array of 10 questions
   let myQuestions = questions;
 
   const handleClick = (e) => {
     e.preventDefault();
-    setHideButton(true)
-    setCurrentQuestion(myQuestions[0].question)
-    setAnswers(sortQuestion(myQuestions[0]))
-  }
+    setHideButton(true);
+    setCurrentQuestion(myQuestions[0].question);
+    setAnswers(sortQuestion(myQuestions[0]));
+  };
 
   const handleAnswer = (value) => {
-
+    
     // Handle correct answer
     if (value === myQuestions[0].correctAnswer) {
       console.log("RIGHT!");
@@ -41,24 +41,27 @@ export default function GameBoard({questions}) {
     }
 
     // Remove question once determined if answer is correct or incorrect
-      myQuestions.shift()
+    myQuestions.shift();
 
-      // Display next question if there are still more questions to go through
-      setTimeout(() => {
-        if (myQuestions.length !== 0) {
-          setCurrentQuestion(myQuestions[0].question);
-          setAnswers(sortQuestion(myQuestions[0]));
-          setCorrectAnswerSelected(false);
-          setFalseAnswerSelected(false);
-        } else {
-          console.log("HEEEY");
-        }
-      }, 3000);
-
+    // Display next question if there are still more questions to go through
+    setTimeout(() => {
+      if (myQuestions.length !== 0) {
+        setCurrentQuestion(myQuestions[0].question);
+        setAnswers(sortQuestion(myQuestions[0]));
+        setCorrectAnswerSelected(false);
+        setFalseAnswerSelected(false);
+      } else {
+        console.log("Out of Questions!!");
+      }
+    }, 3500);
   };
 
-  const setCorrectColor = correctAnswerSelected ? "right-answer animate__animated animate__shakeY animate__slower" : "";
-  const setFalseColor = falseAnswerSelected ? "wrong-answer animate__animated animate__shakeX animate__slower" : "";
+  const setCorrectColor = correctAnswerSelected
+    ? "right-answer animate__animated animate__shakeY animate__slow"
+    : "";
+  const setFalseColor = falseAnswerSelected
+    ? "wrong-answer animate__animated animate__shakeX animate__slow"
+    : "";
 
   return (
     <div className={`board ${setCorrectColor} ${setFalseColor}`}>
