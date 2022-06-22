@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./GameBoard.scss";
+import Scoreboard from "./Scoreboard";
 import sortQuestion from "../../helpers/Sorting";
 import "animate.css";
 
@@ -57,39 +58,42 @@ export default function GameBoard({ questions }) {
   };
 
   const setCorrectColor = correctAnswerSelected
-    ? "right-answer animate__animated animate__shakeY animate__slow"
+    ? "right-answer animate__animated animate__shakeY"
     : "";
   const setFalseColor = falseAnswerSelected
-    ? "wrong-answer animate__animated animate__shakeX animate__slow"
+    ? "wrong-answer animate__animated animate__shakeX"
     : "";
 
   return (
-    <div className={`board ${setCorrectColor} ${setFalseColor} `}>
-      <div className="board-container ">
-        {!hideButton ? (
-          <div className="board-start animate__animated animate__bounceInDown">
-            <button onClick={handleClick}>Begin!</button>
-          </div>
-        ) : (
-          <>
-            <div className="board-question ">{currentQuestion}</div>
-            <div className="board-btns">
-              <button onClick={() => handleAnswer(answers[0])}>
-                {answers[0]}
-              </button>
-              <button onClick={() => handleAnswer(answers[1])}>
-                {answers[1]}
-              </button>
-              <button onClick={() => handleAnswer(answers[2])}>
-                {answers[2]}
-              </button>
-              <button onClick={() => handleAnswer(answers[3])}>
-                {answers[3]}
-              </button>
+    <>
+      <Scoreboard />
+      <div className={`board ${setCorrectColor} ${setFalseColor} `}>
+        <div className="board-container ">
+          {!hideButton ? (
+            <div className="board-start animate__animated animate__bounceInDown">
+              <button onClick={handleClick}>Begin!</button>
             </div>
-          </>
-        )}
+          ) : (
+            <>
+              <div className="board-question ">{currentQuestion}</div>
+              <div className="board-btns">
+                <button onClick={() => handleAnswer(answers[0])}>
+                  {answers[0]}
+                </button>
+                <button onClick={() => handleAnswer(answers[1])}>
+                  {answers[1]}
+                </button>
+                <button onClick={() => handleAnswer(answers[2])}>
+                  {answers[2]}
+                </button>
+                <button onClick={() => handleAnswer(answers[3])}>
+                  {answers[3]}
+                </button>
+              </div>
+            </>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
