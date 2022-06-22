@@ -63,7 +63,7 @@ export default function SelectForm() {
             <div className="select-form-name">
               Feeling smart? Prove it! 
               <br /> 
-              Select a category and click Begin!
+              Please select a category!
             </div>
             <div className="select-form-selector">
               <Select
@@ -73,7 +73,7 @@ export default function SelectForm() {
               />
             </div>
             <button className="select-form-btn" onClick={handleClick}>
-              Begin!
+              Select
             </button>
           </div>
         </form>

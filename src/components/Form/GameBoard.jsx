@@ -64,15 +64,15 @@ export default function GameBoard({ questions }) {
     : "";
 
   return (
-    <div className={`board ${setCorrectColor} ${setFalseColor}`}>
-      <div className="board-container">
+    <div className={`board ${setCorrectColor} ${setFalseColor} `}>
+      <div className="board-container ">
         {!hideButton ? (
-          <div className="board-start">
+          <div className="board-start animate__animated animate__bounceInDown">
             <button onClick={handleClick}>Begin!</button>
           </div>
         ) : (
           <>
-            <div className="board-question">{currentQuestion}</div>
+            <div className="board-question ">{currentQuestion}</div>
             <div className="board-btns">
               <button onClick={() => handleAnswer(answers[0])}>
                 {answers[0]}
