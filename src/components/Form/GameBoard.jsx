@@ -3,6 +3,7 @@ import "./GameBoard.scss";
 import Scoreboard from "./Scoreboard";
 import sortQuestion from "../../helpers/Sorting";
 import "animate.css";
+import { useCountdownTimer } from 'use-countdown-timer';
 
 export default function GameBoard({ questions }) {
   const [currentQuestion, setCurrentQuestion] = useState("");
@@ -11,18 +12,25 @@ export default function GameBoard({ questions }) {
   const [falseAnswerSelected, setFalseAnswerSelected] = useState(false);
   const [hideButton, setHideButton] = useState(false);
 
+  // Countdown timer variables
+  const { countdown, start, reset, pause, isRunning } = useCountdownTimer({
+    timer: 1000 * 10
+  })
+
   // Array of 10 questions
   let myQuestions = questions;
 
+  // Prepares gameboard for first question - hides begin button, selects first question, and starts the timer
   const handleClick = (e) => {
     e.preventDefault();
     setHideButton(true);
     setCurrentQuestion(myQuestions[0].question);
     setAnswers(sortQuestion(myQuestions[0]));
+    start()
   };
 
   const handleAnswer = (value) => {
-    
+    pause();
     // Handle correct answer
     if (value === myQuestions[0].correctAnswer) {
       console.log("RIGHT!");
@@ -41,16 +49,18 @@ export default function GameBoard({ questions }) {
       );
     }
 
-    // Remove question once determined if answer is correct or incorrect
+    // Remove question from array once answered
     myQuestions.shift();
 
-    // Display next question if there are still more questions to go through
+    // Display next question if there are still more questions to go through while resetting timer
     setTimeout(() => {
       if (myQuestions.length !== 0) {
+        reset()
         setCurrentQuestion(myQuestions[0].question);
         setAnswers(sortQuestion(myQuestions[0]));
         setCorrectAnswerSelected(false);
         setFalseAnswerSelected(false);
+        start()
       } else {
         console.log("Out of Questions!!");
       }
@@ -66,12 +76,12 @@ export default function GameBoard({ questions }) {
 
   return (
     <>
-      <Scoreboard />
+      <Scoreboard countdown={countdown}/>
       <div className={`board ${setCorrectColor} ${setFalseColor} `}>
         <div className="board-container ">
           {!hideButton ? (
-            <div className="board-start animate__animated animate__bounceInDown">
-              <button onClick={handleClick}>Begin!</button>
+            <div className="board-start animate__animated animate__fadeIn animate__delay-1s">
+              <button onClick={handleClick}></button>
             </div>
           ) : (
             <>
