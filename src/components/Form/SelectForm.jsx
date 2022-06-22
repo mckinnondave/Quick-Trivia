@@ -57,25 +57,27 @@ export default function SelectForm() {
 
   return (
     <>
-      
-      <form className= {`select-form ${hideForm}`}>
-        <div className="select-form-container">
-          <div className="select-form-name">
-            Feeling smart? Well then, select a category and prove it!
+      {!isFormHidden ? (
+        <form className={`select-form ${hideForm}`}>
+          <div className="select-form-container">
+            <div className="select-form-name">
+              Feeling smart? Well then, select a category and prove it!
+            </div>
+            <div className="select-form-selector">
+              <Select
+                defaultValue={selectedOption}
+                onChange={setSelectedOption}
+                options={options}
+              />
+            </div>
+            <button className="select-form-btn" onClick={handleClick}>
+              Select
+            </button>
           </div>
-          <div className="select-form-selector">
-            <Select
-              defaultValue={selectedOption}
-              onChange={setSelectedOption}
-              options={options}
-            />
-          </div>
-          <button className="select-form-btn" onClick={handleClick}>
-            Select
-          </button>
-        </div>
-      </form>
-      <GameBoard questions={questions} />
+        </form>
+      ) : (
+        <GameBoard questions={questions} />
+      )}
     </>
   );
 }

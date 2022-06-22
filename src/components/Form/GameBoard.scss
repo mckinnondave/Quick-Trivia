@@ -24,6 +24,8 @@
     display: flex;
     justify-content: center;
     height: 35%;
+    margin-top: 12%;
+    font-size: 25px;
   }
 
   &-btns {
@@ -39,13 +41,15 @@
 }
 
 .wrong-answer{
-  background-color: rgb(236, 83, 83);
-  transition: 0.7s;
+  background-color: rgb(219, 163, 163);
+  transition: 1.3s;
+  
 }
 
 .right-answer{
-  background-color: rgb(67, 165, 67);
-  transition: 0.7s;
+  background-color: rgb(123, 167, 123);
+  transition: 1.3s;
+  
 }
 
 
