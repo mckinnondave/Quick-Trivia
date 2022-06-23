@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./GameBoard.scss";
 import Scoreboard from "./Scoreboard";
 import sortQuestion from "../../helpers/Sorting";
@@ -17,8 +17,8 @@ export default function GameBoard({ questions }) {
   const [gameComplete, setGameComplete] = useState(false);
 
   // Countdown timer variables
-  const { countdown, start, reset, pause, isRunning } = useCountdownTimer({
-    timer: 1000 * 20,
+  const { countdown, start, reset, pause } = useCountdownTimer({
+    timer: 1000 * 6,
   });
 
   // Array of 10 questions
@@ -33,6 +33,34 @@ export default function GameBoard({ questions }) {
     start();
   };
 
+  // Handles situation where no answer is selected
+  useEffect(() => {
+    if (countdown === 0) {
+      myQuestions.shift();
+      setFalseAnswerSelected(true);
+      setCurrentQuestion("Timeup")
+
+      setTimeout(() => {
+        if (myQuestions.length !== 0) {
+          reset();
+          setCount((prev) => prev + 1);
+          setCurrentQuestion(myQuestions[0].question);
+          setAnswers(sortQuestion(myQuestions[0]));
+          setFalseAnswerSelected(false);
+          start();
+        }
+  
+        if (myQuestions.length === 0) {
+          console.log("Out of Questions!!");
+          setFalseAnswerSelected(false);
+          setGameComplete(true);
+        }
+      }, 3500);
+      
+    }
+  }, [start, countdown, reset, myQuestions, pause]);
+
+  // Handles correct or incorrect answers and then resets for next question
   const handleAnswer = (value) => {
     pause();
     // Handle correct answer
