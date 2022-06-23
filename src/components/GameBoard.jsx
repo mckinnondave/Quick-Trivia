@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./GameBoard.scss";
 import Scoreboard from "./Scoreboard";
-import sortQuestion from "../../helpers/Sorting";
+import sortQuestion from "../helpers/Sorting";
 import "animate.css";
 import { useCountdownTimer } from "use-countdown-timer";
 import GameOver from "./GameOver";

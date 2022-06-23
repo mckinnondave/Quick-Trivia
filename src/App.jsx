@@ -1,5 +1,5 @@
 import "./App.scss";
-import SelectForm from "./components/Form/SelectForm";
+import SelectForm from "./components/SelectForm";
 
 function App() {
 
