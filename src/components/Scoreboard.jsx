@@ -3,7 +3,6 @@ import React from 'react'
 
 export default function Scoreboard({countdown, count, questionScore}) {
   
-
   return (
     <div className='scoreboard animate__animated animate__bounceInDown'>
       <div className='scoreboard-score'>

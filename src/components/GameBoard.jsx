@@ -62,7 +62,9 @@ export default function GameBoard({ questions }) {
 
   // Handles correct or incorrect answers and then resets for next question
   const handleAnswer = (value) => {
+
     pause();
+
     // Handle correct answer
     if (value === myQuestions[0].correctAnswer) {
       console.log("RIGHT!");
@@ -85,7 +87,7 @@ export default function GameBoard({ questions }) {
     // Remove question from array once answered
     myQuestions.shift();
 
-    // Display next question if there are still more questions to go through while resetting timer
+    // Display next question if there are still more questions to go through while also resetting timer
     setTimeout(() => {
       if (myQuestions.length !== 0) {
         reset();

@@ -23,7 +23,7 @@ export default function SelectForm() {
   const [questions, setQuestions] = useState([]);
   const [isFormHidden, setIsFormHidden] = useState(false)
 
-  // Prevent refresh and uses getInfo function to find questions
+  // Prevent refresh and uses getListOfQuestions function to find questions
   function handleClick(e) {
     e.preventDefault();
     getListOfQuestions(selectedOption.value);
