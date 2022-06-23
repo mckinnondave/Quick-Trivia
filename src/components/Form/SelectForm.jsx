@@ -57,7 +57,7 @@ export default function SelectForm() {
   return (
     <>
       {!isFormHidden ? (
-        <form className={`select-form ${hideForm}`}>
+        <form className={`select-form animate__animated animate__bounceIn ${hideForm}`}>
           <div className="select-form-container">
             <div className="select-form-name">
               Feeling smart? Prove it! 

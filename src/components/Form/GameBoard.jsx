@@ -3,7 +3,8 @@ import "./GameBoard.scss";
 import Scoreboard from "./Scoreboard";
 import sortQuestion from "../../helpers/Sorting";
 import "animate.css";
-import { useCountdownTimer } from 'use-countdown-timer';
+import { useCountdownTimer } from "use-countdown-timer";
+import GameOver from "./GameOver";
 
 export default function GameBoard({ questions }) {
   const [currentQuestion, setCurrentQuestion] = useState("");
@@ -13,12 +14,12 @@ export default function GameBoard({ questions }) {
   const [hideButton, setHideButton] = useState(false);
   const [count, setCount] = useState(1);
   const [questionScore, setQuestionScore] = useState(0);
-  const [gameComplete, setGameComplete] = useState(false)
+  const [gameComplete, setGameComplete] = useState(false);
 
   // Countdown timer variables
   const { countdown, start, reset, pause, isRunning } = useCountdownTimer({
-    timer: 1000 * 20
-  })
+    timer: 1000 * 20,
+  });
 
   // Array of 10 questions
   let myQuestions = questions;
@@ -29,7 +30,7 @@ export default function GameBoard({ questions }) {
     setHideButton(true);
     setCurrentQuestion(myQuestions[0].question);
     setAnswers(sortQuestion(myQuestions[0]));
-    start()
+    start();
   };
 
   const handleAnswer = (value) => {
@@ -41,7 +42,7 @@ export default function GameBoard({ questions }) {
       setCurrentQuestion(
         `CORRECT! The answer is "${myQuestions[0].correctAnswer}!"`
       );
-      setQuestionScore(prev => prev + (countdown/100 + 100))
+      setQuestionScore((prev) => prev + countdown / 100);
     }
 
     // Handle incorrect answer
@@ -59,16 +60,16 @@ export default function GameBoard({ questions }) {
     // Display next question if there are still more questions to go through while resetting timer
     setTimeout(() => {
       if (myQuestions.length !== 0) {
-        reset()
-        setCount(prev => prev + 1)
+        reset();
+        setCount((prev) => prev + 1);
         setCurrentQuestion(myQuestions[0].question);
         setAnswers(sortQuestion(myQuestions[0]));
         setCorrectAnswerSelected(false);
         setFalseAnswerSelected(false);
-        start()
+        start();
       } else {
         console.log("Out of Questions!!");
-        
+        setGameComplete(true);
       }
     }, 3500);
   };
@@ -82,34 +83,44 @@ export default function GameBoard({ questions }) {
 
   return (
     <>
-      <Scoreboard countdown={countdown} count={count} questionScore={questionScore}/>
-      <div className={`board ${setCorrectColor} ${setFalseColor} `}>
-        <div className="board-container ">
-          {!hideButton ? (
-            <div className="board-start animate__animated animate__fadeIn animate__delay-1s">
-              <button onClick={handleClick}>Begin!</button>
+      {!gameComplete ? (
+        <>
+          <Scoreboard
+            countdown={countdown}
+            count={count}
+            questionScore={questionScore}
+          />
+          <div className={`board ${setCorrectColor} ${setFalseColor} `}>
+            <div className="board-container ">
+              {!hideButton ? (
+                <div className="board-start animate__animated animate__fadeIn animate__delay-1s">
+                  <button onClick={handleClick}>Begin!</button>
+                </div>
+              ) : (
+                <>
+                  <div className="board-question ">{currentQuestion}</div>
+                  <div className="board-btns">
+                    <button onClick={() => handleAnswer(answers[0])}>
+                      {answers[0]}
+                    </button>
+                    <button onClick={() => handleAnswer(answers[1])}>
+                      {answers[1]}
+                    </button>
+                    <button onClick={() => handleAnswer(answers[2])}>
+                      {answers[2]}
+                    </button>
+                    <button onClick={() => handleAnswer(answers[3])}>
+                      {answers[3]}
+                    </button>
+                  </div>
+                </>
+              )}
             </div>
-          ) : (
-            <>
-              <div className="board-question ">{currentQuestion}</div>
-              <div className="board-btns">
-                <button onClick={() => handleAnswer(answers[0])}>
-                  {answers[0]}
-                </button>
-                <button onClick={() => handleAnswer(answers[1])}>
-                  {answers[1]}
-                </button>
-                <button onClick={() => handleAnswer(answers[2])}>
-                  {answers[2]}
-                </button>
-                <button onClick={() => handleAnswer(answers[3])}>
-                  {answers[3]}
-                </button>
-              </div>
-            </>
-          )}
-        </div>
-      </div>
+          </div>
+        </>
+      ) : (
+        <GameOver />
+      )}
     </>
   );
 }
