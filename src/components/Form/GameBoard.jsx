@@ -18,7 +18,7 @@ export default function GameBoard({ questions }) {
 
   // Countdown timer variables
   const { countdown, start, reset, pause } = useCountdownTimer({
-    timer: 1000 * 6,
+    timer: 1000 * 20,
   });
 
   // Array of 10 questions
@@ -70,7 +70,7 @@ export default function GameBoard({ questions }) {
       setCurrentQuestion(
         `CORRECT! The answer is "${myQuestions[0].correctAnswer}!"`
       );
-      setQuestionScore((prev) => prev + (countdown / 100) * 5);
+      setQuestionScore((prev) => prev + (countdown / 100) * 1.5);
     }
 
     // Handle incorrect answer
