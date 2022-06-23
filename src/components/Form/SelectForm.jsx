@@ -28,7 +28,6 @@ export default function SelectForm() {
     e.preventDefault();
     getListOfQuestions(selectedOption.value);
     setIsFormHidden(true);
-    console.log("a")
   }
 
   // Takes selected category from form and finds questions after submit button is clicked

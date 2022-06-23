@@ -11,10 +11,13 @@ export default function GameBoard({ questions }) {
   const [correctAnswerSelected, setCorrectAnswerSelected] = useState(false);
   const [falseAnswerSelected, setFalseAnswerSelected] = useState(false);
   const [hideButton, setHideButton] = useState(false);
+  const [count, setCount] = useState(1);
+  const [questionScore, setQuestionScore] = useState(0);
+  const [gameComplete, setGameComplete] = useState(false)
 
   // Countdown timer variables
   const { countdown, start, reset, pause, isRunning } = useCountdownTimer({
-    timer: 1000 * 10
+    timer: 1000 * 20
   })
 
   // Array of 10 questions
@@ -38,6 +41,7 @@ export default function GameBoard({ questions }) {
       setCurrentQuestion(
         `CORRECT! The answer is "${myQuestions[0].correctAnswer}!"`
       );
+      setQuestionScore(prev => prev + (countdown/100 + 100))
     }
 
     // Handle incorrect answer
@@ -56,6 +60,7 @@ export default function GameBoard({ questions }) {
     setTimeout(() => {
       if (myQuestions.length !== 0) {
         reset()
+        setCount(prev => prev + 1)
         setCurrentQuestion(myQuestions[0].question);
         setAnswers(sortQuestion(myQuestions[0]));
         setCorrectAnswerSelected(false);
@@ -63,6 +68,7 @@ export default function GameBoard({ questions }) {
         start()
       } else {
         console.log("Out of Questions!!");
+        
       }
     }, 3500);
   };
@@ -76,12 +82,12 @@ export default function GameBoard({ questions }) {
 
   return (
     <>
-      <Scoreboard countdown={countdown}/>
+      <Scoreboard countdown={countdown} count={count} questionScore={questionScore}/>
       <div className={`board ${setCorrectColor} ${setFalseColor} `}>
         <div className="board-container ">
           {!hideButton ? (
             <div className="board-start animate__animated animate__fadeIn animate__delay-1s">
-              <button onClick={handleClick}></button>
+              <button onClick={handleClick}>Begin!</button>
             </div>
           ) : (
             <>
