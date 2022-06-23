@@ -70,7 +70,7 @@ export default function GameBoard({ questions }) {
       setCurrentQuestion(
         `CORRECT! The answer is "${myQuestions[0].correctAnswer}!"`
       );
-      setQuestionScore((prev) => prev + countdown / 100);
+      setQuestionScore((prev) => prev + (countdown / 100) * 5);
     }
 
     // Handle incorrect answer
