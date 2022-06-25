@@ -31,7 +31,7 @@ export default function SelectForm() {
   }
 
   // Takes selected category from form and finds questions after submit button is clicked
-  const getListOfQuestions = (category) => {
+  const getListOfQuestions = async (category) => {
     const options = {
       method: "GET",
       url: "https://trivia8.p.rapidapi.com/questions",
@@ -41,7 +41,7 @@ export default function SelectForm() {
         "X-RapidAPI-Key": `${process.env.REACT_APP_API_KEY}`,
       },
     };
-    axios
+    await axios
       .request(options)
       .then(function (response) {
         console.log("DATA", response.data);

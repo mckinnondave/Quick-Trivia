@@ -1,9 +1,41 @@
 .gameover {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
+  flex-direction: column;
   border-radius: 10px;
   border: solid black 2px;
   height: 500px;
   width: 500px;
   background-color: #BAD8DD;
+  align-items: center;
+
+  &-text {
+ 
+    height: 30%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 70px;
+  }
+
+  &-score {
+    border: solid black 1px;
+    height: 30%;
+    width: 100%;
+  }
+}
+
+.return {
+  border: solid black 1px;
+  height: 15%;
+  width: 30%;
+  border-radius: 5px;
+
+  &:hover {
+    background-color: #75B1BC;
+    cursor: pointer;
+    border: solid black 1px;
+    transition: 0.3s;
+  }
 }
