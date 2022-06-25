@@ -15,6 +15,7 @@ export default function GameBoard({ questions }) {
   const [count, setCount] = useState(1);
   const [questionScore, setQuestionScore] = useState(0);
   const [gameComplete, setGameComplete] = useState(false);
+  // const [disableButton, setDisableButton] = useState(false)
 
   // Countdown timer variables
   const { countdown, start, reset, pause } = useCountdownTimer({
@@ -63,6 +64,7 @@ export default function GameBoard({ questions }) {
   // Handles correct or incorrect answers and then resets for next question
   const handleAnswer = (value) => {
 
+    // setDisableButton(true)
     pause();
 
     // Handle correct answer
@@ -96,6 +98,7 @@ export default function GameBoard({ questions }) {
         setAnswers(sortQuestion(myQuestions[0]));
         setCorrectAnswerSelected(false);
         setFalseAnswerSelected(false);
+        // setDisableButton(false)
         start();
       } else {
         console.log("Out of Questions!!");
@@ -110,6 +113,7 @@ export default function GameBoard({ questions }) {
   const setFalseColor = falseAnswerSelected
     ? "wrong-answer animate__animated animate__shakeX"
     : "";
+  const setDisabled = disableButton ? "disabled-btn" : "";
 
   return (
     <>
@@ -130,16 +134,16 @@ export default function GameBoard({ questions }) {
                 <>
                   <div className="board-question ">{currentQuestion}</div>
                   <div className="board-btns">
-                    <button onClick={() => handleAnswer(answers[0])}>
+                    <button className={`${setDisabled}`} onClick={() => handleAnswer(answers[0])}>
                       {answers[0]}
                     </button>
-                    <button onClick={() => handleAnswer(answers[1])}>
+                    <button className={`${setDisabled}`} onClick={() => handleAnswer(answers[1])}>
                       {answers[1]}
                     </button>
-                    <button onClick={() => handleAnswer(answers[2])}>
+                    <button className={`${setDisabled}`} onClick={() => handleAnswer(answers[2])}>
                       {answers[2]}
                     </button>
-                    <button onClick={() => handleAnswer(answers[3])}>
+                    <button className={`${setDisabled}`} onClick={() => handleAnswer(answers[3])}>
                       {answers[3]}
                     </button>
                   </div>

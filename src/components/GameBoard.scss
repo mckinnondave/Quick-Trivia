@@ -69,13 +69,15 @@
 .wrong-answer{
   background-color: rgb(219, 163, 163);
   transition: 1s;
-  
 }
 
 .right-answer{
   background-color: rgb(123, 167, 123);
   transition: 1s;
-  
+}
+
+.disabled-btn {
+  pointer-events: none;
 }
 
 
