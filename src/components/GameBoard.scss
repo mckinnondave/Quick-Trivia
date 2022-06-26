@@ -101,6 +101,11 @@
           &:hover {
             pointer-events: none;
           }
+
+          &:active {
+            background-color: #75B1BC;
+            transition: 0.3s;
+          }
         }
       }
     }
