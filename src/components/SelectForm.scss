@@ -50,3 +50,10 @@
     }
   }
 }
+
+@media (max-width: 1024px) {
+  .select-form {
+    height: 50vh;
+    width: 90vw;
+  }
+}

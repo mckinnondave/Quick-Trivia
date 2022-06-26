@@ -83,5 +83,22 @@
   pointer-events: none;
 }
 
+@media (max-width: 1024px) {
+  .board {
+    height: 50vh;
+    width: 90vw;
+  
+    &-question { 
+      font-size: 18px; 
+    }
+  
+    &-btns {
+      & button {
+        font-size: 15px;
+      }
+    }
+  }  
+}
+
 
 

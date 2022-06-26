@@ -58,17 +58,42 @@
 }
 
 .return {
-  border: solid black 1px;
   height: 15%;
-  width: 30%;
+  width: 35%;
   border-radius: 5px;
+  font-size: large;
   background-color: #E3EFF1;
-  font-size: 18px;
+  border: solid rgb(180, 180, 180) 1px;
 
   &:hover {
     background-color: #75B1BC;
     cursor: pointer;
     border: solid black 1px;
     transition: 0.3s;
+  }
+}
+
+@media (max-width: 1024px) {
+  .gameover {
+    height: 50vh;
+    width: 90vw;
+  
+    &-text {
+      font-size: 50px;
+    }
+  
+    &-score {
+        
+      &-text {
+          
+        &-top {
+          font-size: 18px;
+        }        
+      }
+    }
+  }
+  
+  .return {
+    font-size: 18px;
   }
 }

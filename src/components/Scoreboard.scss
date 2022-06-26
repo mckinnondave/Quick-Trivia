@@ -72,3 +72,12 @@
     }
   }
 }
+
+@media (max-width: 1024px) {
+  .scoreboard {
+      
+    &-timer {
+      font-size: 40px;
+    }
+  }
+}
