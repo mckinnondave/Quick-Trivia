@@ -113,7 +113,7 @@ export default function GameBoard({ questions }) {
   const setFalseColor = falseAnswerSelected
     ? "wrong-answer animate__animated animate__shakeX"
     : "";
-  const setDisabled = disableButton ? "disabled-btn" : "";
+  // const setDisabled = disableButton ? "disabled-btn" : "";
 
   return (
     <>
@@ -134,16 +134,16 @@ export default function GameBoard({ questions }) {
                 <>
                   <div className="board-question ">{currentQuestion}</div>
                   <div className="board-btns">
-                    <button className={`${setDisabled}`} onClick={() => handleAnswer(answers[0])}>
+                    <button /*className={`${setDisabled}`}*/ onClick={() => handleAnswer(answers[0])}>
                       {answers[0]}
                     </button>
-                    <button className={`${setDisabled}`} onClick={() => handleAnswer(answers[1])}>
+                    <button  /*className={`${setDisabled}`}*/ onClick={() => handleAnswer(answers[1])}>
                       {answers[1]}
                     </button>
-                    <button className={`${setDisabled}`} onClick={() => handleAnswer(answers[2])}>
+                    <button  /*className={`${setDisabled}`}*/ onClick={() => handleAnswer(answers[2])}>
                       {answers[2]}
                     </button>
-                    <button className={`${setDisabled}`} onClick={() => handleAnswer(answers[3])}>
+                    <button  /*className={`${setDisabled}`}*/ onClick={() => handleAnswer(answers[3])}>
                       {answers[3]}
                     </button>
                   </div>
@@ -153,7 +153,7 @@ export default function GameBoard({ questions }) {
           </div>
         </>
       ) : (
-        <GameOver />
+        <GameOver questionScore={questionScore}/>
       )}
     </>
   );
