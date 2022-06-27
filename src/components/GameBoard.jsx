@@ -64,7 +64,7 @@ export default function GameBoard({ questions }) {
   // Handles correct or incorrect answers and then resets for next question
   const handleAnswer = (value) => {
 
-    // setDisableButton(true)
+    setDisableButton(true)
     pause();
 
     // Handle correct answer
@@ -98,7 +98,7 @@ export default function GameBoard({ questions }) {
         setAnswers(sortQuestion(myQuestions[0]));
         setCorrectAnswerSelected(false);
         setFalseAnswerSelected(false);
-        // setDisableButton(false)
+        setDisableButton(false)
         start();
       } else {
         console.log("Out of Questions!!");
