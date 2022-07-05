@@ -4,6 +4,8 @@ import "./SelectForm.scss";
 import Select from "react-select";
 import GameBoard from "./GameBoard";
 
+export const SelectionContext = React.createContext()
+
 const options = [
   { value: "arts_and_literature", label: "Arts & Literature" },
   { value: "film_and_tv", label: "Film & TV" },
@@ -34,7 +36,7 @@ export default function SelectForm() {
   const getListOfQuestions = async (category) => {
     const options = {
       method: "GET",
-      url: "https://trivia8.p.rapidapi.com/questions",
+      url: "https://trivia8.p.rapidapi.com/api/questions",
       params: { limit: "10", categories: `${category}` },
       headers: {
         "X-RapidAPI-Host": "trivia8.p.rapidapi.com",
@@ -56,29 +58,33 @@ export default function SelectForm() {
 
   return (
     <>
-      {!isFormHidden ? (
-        <form className={`select-form animate__animated animate__bounceIn ${hideForm}`}>
-          <div className="select-form-container">
-            <div className="select-form-name">
-              Feeling smart? Prove it! 
-              <br /> 
-              Please select a category!
+      <SelectionContext.Provider value={selectedOption}>
+        {!isFormHidden ? (
+          <form
+            className={`select-form animate__animated animate__bounceIn ${hideForm}`}
+          >
+            <div className="select-form-container">
+              <div className="select-form-name">
+                Feeling smart? Prove it!
+                <br />
+                Please select a category!
+              </div>
+              <div className="select-form-selector">
+                <Select
+                  defaultValue={selectedOption}
+                  onChange={setSelectedOption}
+                  options={options}
+                />
+              </div>
+              <button className="select-form-btn" onClick={handleClick}>
+                Select
+              </button>
             </div>
-            <div className="select-form-selector">
-              <Select
-                defaultValue={selectedOption}
-                onChange={setSelectedOption}
-                options={options}
-              />
-            </div>
-            <button className="select-form-btn" onClick={handleClick}>
-              Select
-            </button>
-          </div>
-        </form>
-      ) : (
-        <GameBoard questions={questions} />
-      )}
+          </form>
+        ) : (
+          <GameBoard questions={questions} />
+        )}
+      </SelectionContext.Provider>
     </>
   );
 }

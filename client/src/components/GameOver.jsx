@@ -1,8 +1,9 @@
 import './GameOver.scss'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import Leaderboard from './Leaderboard'
 
 export default function GameOver({questionScore}) {
-  const [listOfScores, setListOfScores] = useState([{id:1, name: "Jack", category: "Film & TV", score: 700}])
+
   return (
     <>
     <div className='gameover animate__animated animate__jackInTheBox'>
@@ -14,18 +15,8 @@ export default function GameOver({questionScore}) {
         </div>
       </div>
       <button className='return' onClick={() => window.location.reload(false)}>Play Again?</button>
-    </div>
-
-    <div className='getScores'></div>
-      {listOfScores.map((score) => {
-        return (
-        <div>
-          <h1>Name: {score.name}</h1>
-          <h1>Category: {score.category}</h1>
-          <h1>Score: {score.score}</h1>
-        </div>
-        )
-      })}
-    </>
+    </div>  
+    <Leaderboard />
+    </>  
   )
 }
