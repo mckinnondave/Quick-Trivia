@@ -1,6 +1,6 @@
 import "./GameOver.scss";
 import React, { useContext } from "react";
-import Leaderboard from "./Leaderboard";
+// import Leaderboard from "./Leaderboard";
 import { ScoreContext } from "./GameBoard";
 
 export default function GameOver() {
