@@ -6,6 +6,8 @@ import "animate.css";
 import { useCountdownTimer } from "use-countdown-timer";
 import GameOver from "./GameOver";
 
+export const ScoreContext = React.createContext()
+
 export default function GameBoard({ questions }) {
   const [currentQuestion, setCurrentQuestion] = useState("");
   const [answers, setAnswers] = useState([]);
@@ -117,12 +119,12 @@ export default function GameBoard({ questions }) {
 
   return (
     <>
+    <ScoreContext.Provider value={questionScore}>
       {!gameComplete ? (
         <>
           <Scoreboard
             countdown={countdown}
             count={count}
-            questionScore={questionScore}
           />
           <div className={`board ${setCorrectColor} ${setFalseColor} `}>
             <div className="board-container ">
@@ -153,8 +155,9 @@ export default function GameBoard({ questions }) {
           </div>
         </>
       ) : (
-        <GameOver questionScore={questionScore}/>
+        <GameOver />
       )}
+      </ScoreContext.Provider>
     </>
   );
 }
