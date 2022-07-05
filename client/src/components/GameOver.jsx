@@ -25,7 +25,7 @@ export default function GameOver() {
           Play Again?
         </button>
       </div>
-      <Leaderboard />
+      {/* <Leaderboard /> */}
     </>
   );
 }
