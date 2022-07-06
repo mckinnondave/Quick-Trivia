@@ -2,7 +2,11 @@
 
 Feeling smart? Test yourself with some Quick Trivia by checking it out on [Netlify!](https://quick-trivia-game.netlify.app/)
 
-This app was created using React with the intention of improving my skills with the library. 
+This app was created using React with the intention of improving my skills with the library. Some new skills I've gained from working on this project includes an introduction to:
+- MongoDB (To store leaderboard data)
+- Netlify (Hosts my front-end)
+- Heroku (Hosts my back-end)
+- React Context
 
 A user can select the category they want to test themselves in, and 10 questions will be randomly selected using a trivia [API](https://rapidapi.com/willrfry/api/trivia8/). When a user begins their game, a timer starts, and if they answer correctly, their score will increase based on how quick the user answered the question.
 
