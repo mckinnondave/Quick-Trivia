@@ -3,18 +3,37 @@
   border-radius: 10px;
   height: auto;
   width: 500px;
+  min-height: 500px;
   border-spacing: 0;
   overflow: hidden;
 
-  tr:nth-child(even) {background-color: #BAD8DD;}
-  tr:nth-child(odd) {background-color: #FFF}
-  tr:first-child {background-color: #75B1BC}
-
   &-header {
+    height: 80px;
+
     & th {
       border-bottom: solid black 1px;
+      font-size: 20px;
+      font-weight: bold;
+      background-color: #75B1BC;
     }
   }
-  
+
+  tr:nth-child(even) {
+    background-color: #BAD8DD;
+    font-size: 15px;
+  }
+  tr:nth-child(odd) {
+    background-color: #FFF;
+    font-size: 15px;
+  }
+
+  &-category {
+    border-left: solid 1px black;
+    border-right: solid 1px black;
+  }
+
+  &-name {
+    border-left: solid black 1px;
+  }
   
 }

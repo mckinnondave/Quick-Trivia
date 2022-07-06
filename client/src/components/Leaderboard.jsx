@@ -18,7 +18,7 @@ export default function Leaderboard() {
         setListOfScores(response.data);
       }
     );
-  }, []);
+  }, [listOfScores]);
 
   const saveScore = () => {
     Axios.post("https://trivia-react-game.herokuapp.com/postScore", {
@@ -37,20 +37,26 @@ export default function Leaderboard() {
   return (
     <>
       <table className="leaderboard">
-        <tr className="leaderboard-header">
-          <th>Name</th>
-          <th>Category</th>
-          <th>Score</th>
-        </tr>
-        {listOfScores.map((score) => {
-          return (
-            <tr key={uniqueID()}>
-              <th>{score.name}</th>
-              <th>{score.category}</th>
-              <th>{score.score}</th>
-            </tr>
-          );
-        })}
+        <thead className="leaderboard-header">
+          <tr>
+            <th>Rank</th>
+            <th className="leaderboard-name">Name</th>
+            <th className="leaderboard-category">Category</th>
+            <th>Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          {listOfScores.map((score, index) => {
+            return (
+              <tr key={uniqueID()}>
+                <th>{index + 1}</th>
+                <th className="leaderboard-name">{score.name}</th>
+                <th className="leaderboard-category">{score.category}</th>
+                <th>{score.score}</th>
+              </tr>
+            );
+          })}
+        </tbody>
       </table>
 
       <div>
