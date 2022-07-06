@@ -1,6 +1,20 @@
 .leaderboard {
   border: solid black 2px;
+  border-radius: 10px;
   height: auto;
-  width: 100%;
-  background-color: white;
+  width: 500px;
+  border-spacing: 0;
+  overflow: hidden;
+
+  tr:nth-child(even) {background-color: #BAD8DD;}
+  tr:nth-child(odd) {background-color: #FFF}
+  tr:first-child {background-color: #75B1BC}
+
+  &-header {
+    & th {
+      border-bottom: solid black 1px;
+    }
+  }
+  
+  
 }

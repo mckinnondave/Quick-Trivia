@@ -36,17 +36,22 @@ export default function Leaderboard() {
 
   return (
     <>
-      <div className="leaderboard">
+      <table className="leaderboard">
+        <tr className="leaderboard-header">
+          <th>Name</th>
+          <th>Category</th>
+          <th>Score</th>
+        </tr>
         {listOfScores.map((score) => {
           return (
-            <div key={uniqueID()}>
-              <h3>Name: {score.name}</h3>
-              <h3>Category: {score.category}</h3>
-              <h3>Score: {score.score}</h3>
-            </div>
+            <tr key={uniqueID()}>
+              <th>{score.name}</th>
+              <th>{score.category}</th>
+              <th>{score.score}</th>
+            </tr>
           );
         })}
-      </div>
+      </table>
 
       <div>
         <input

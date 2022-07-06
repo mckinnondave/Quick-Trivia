@@ -3,6 +3,7 @@ import axios from "axios";
 import "./SelectForm.scss";
 import Select from "react-select";
 import GameBoard from "./GameBoard";
+import Leaderboard from "./Leaderboard";
 
 export const SelectionContext = React.createContext()
 
@@ -58,7 +59,8 @@ export default function SelectForm() {
 
   return (
     <>
-      <SelectionContext.Provider value={selectedOption}>
+    <Leaderboard />
+      {/* <SelectionContext.Provider value={selectedOption}>
         {!isFormHidden ? (
           <form
             className={`select-form animate__animated animate__bounceIn ${hideForm}`}
@@ -84,7 +86,7 @@ export default function SelectForm() {
         ) : (
           <GameBoard questions={questions} />
         )}
-      </SelectionContext.Provider>
+      </SelectionContext.Provider> */}
     </>
   );
 }
