@@ -1,8 +1,6 @@
 ## Quick Trivia
 
-### *APP CURRENTLY DOWN WHILE SERVER IS BEING CREATED*
-
-Feeling smart? Test yourself with some Quick Trivia! Check it out on [Heroku!](https://trivia-react-game.herokuapp.com/)
+Feeling smart? Test yourself with some Quick Trivia by checking it out on [Netlify!](https://quick-trivia-game.netlify.app/)
 
 This app was created using React with the intention of improving my skills with the library. 
 

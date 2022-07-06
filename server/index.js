@@ -20,7 +20,7 @@ app.get("/getScores", (req, res) => {
     } else {
       res.json(result);
     }
-  });
+  }).sort({score:-1});
 });
 
 app.post("/postScore", async (req, res) => {
@@ -31,6 +31,6 @@ app.post("/postScore", async (req, res) => {
   res.json(score)
 })
 
-app.listen(3001, () => {
+app.listen(process.env.PORT || 3001, () => {
   console.log("SERVER IS RUNNING!");
 });
