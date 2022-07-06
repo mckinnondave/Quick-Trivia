@@ -5,7 +5,7 @@ import { SelectionContext } from "./SelectForm";
 import { ScoreContext } from "./GameBoard";
 import uniqueID from "../helpers/uniqueID";
 
-export default function Leaderboard() {
+export default function Leaderboard({setLeaderboardVisible}) {
   const [listOfScores, setListOfScores] = useState([]);
   const [name, setName] = useState("");
 
@@ -36,6 +36,9 @@ export default function Leaderboard() {
 
   return (
     <>
+    <div className="leaderboard-title">
+      Leaderboard
+    </div>
       <table className="leaderboard">
         <thead className="leaderboard-header">
           <tr>
@@ -60,14 +63,16 @@ export default function Leaderboard() {
       </table>
 
       <div>
-        <input
+        {/* <input
           type="text"
           placeholder="name"
           onChange={(event) => {
             setName(event.target.value);
           }}
-        />
-        <button onClick={saveScore}>Send</button>
+        /> */}
+        <button onClick={() => setLeaderboardVisible(false)}>Back</button>
+        <button onClick={() => window.location.reload(false)}>Play Again</button>
+        <button onClick={saveScore}>Submit Score</button>
       </div>
     </>
   );
