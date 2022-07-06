@@ -20,7 +20,7 @@ app.get("/getScores", (req, res) => {
     } else {
       res.json(result);
     }
-  });
+  }).sort({score:-1});
 });
 
 app.post("/postScore", async (req, res) => {
