@@ -9,6 +9,7 @@ export default function Leaderboard({setLeaderboardVisible}) {
   const [listOfScores, setListOfScores] = useState([]);
   const [name, setName] = useState("");
   const [showNameInputForm, setShowNameInputForm] = useState(false);
+  const [disableButton, setDisableButton] = useState(false)
 
   const categorySelection = useContext(SelectionContext);
   const playerScore = useContext(ScoreContext);
@@ -22,6 +23,7 @@ export default function Leaderboard({setLeaderboardVisible}) {
   }, [listOfScores]);
 
   const saveScore = () => {
+    setDisableButton(true)
     Axios.post("https://trivia-react-game.herokuapp.com/postScore", {
       name: name,
       category: categorySelection.label,
@@ -34,6 +36,8 @@ export default function Leaderboard({setLeaderboardVisible}) {
       setShowNameInputForm(false)
     });
   };
+
+  const setDisabled = disableButton ? "disabled-btn" : "";
 
   return (
     <>
@@ -64,7 +68,7 @@ export default function Leaderboard({setLeaderboardVisible}) {
       </table>
       
       {showNameInputForm &&
-        <div className="prompt-box animate__animated animate__zoomIn">
+        <div className="prompt-box animate__animated animate__zoomIn animate__faster">
         Please enter your name or initials below <b>Thanks for playing!</b>
         <input
           type="text"
@@ -73,8 +77,8 @@ export default function Leaderboard({setLeaderboardVisible}) {
             setName(event.target.value);
           }}
         />
-        <div className="prompt-box-btns">
-          <button onClick={() => saveScore()}>Submit</button>
+        <div className="prompt-box-btn">
+          <button onClick={() => {saveScore(); setDisableButton(true)}}>Submit</button>
           <button onClick={() => setShowNameInputForm(false)}>Cancel</button>
         </div>
       </div>
@@ -86,7 +90,7 @@ export default function Leaderboard({setLeaderboardVisible}) {
         <button onClick={() => window.location.reload(false)}>
           Play Again
         </button>
-        <button onClick={() => setShowNameInputForm(true)}>Submit Score</button>
+        <button className={`${setDisabled}`} onClick={() => setShowNameInputForm(true)}>Submit Score</button>
       </div>
     </>
   );

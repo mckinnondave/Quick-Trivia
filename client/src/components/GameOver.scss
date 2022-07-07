@@ -92,12 +92,15 @@
     }
     }
   
-  
-  
     @media (max-width: 480px) {
       .gameover {
         height: 50vh;
         width: 90vw;
+
+        & button {
+          font-size: 15px;
+          font-weight: bold;
+        }
   
         &-text {
           font-size: 50px;

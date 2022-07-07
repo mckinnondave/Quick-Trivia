@@ -59,8 +59,7 @@ export default function SelectForm() {
 
   return (
     <>
-    <Leaderboard />
-      {/* <SelectionContext.Provider value={selectedOption}>
+      <SelectionContext.Provider value={selectedOption}>
         {!isFormHidden ? (
           <form
             className={`select-form animate__animated animate__bounceIn ${hideForm}`}
@@ -86,7 +85,7 @@ export default function SelectForm() {
         ) : (
           <GameBoard questions={questions} />
         )}
-      </SelectionContext.Provider> */}
+      </SelectionContext.Provider>
     </>
   );
 }
