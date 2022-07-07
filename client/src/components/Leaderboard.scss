@@ -23,7 +23,7 @@
     font-size: 15px;
   }
   tr:nth-child(odd) {
-    background-color: #FFF;
+    background-color: #E3EFF1;
     font-size: 15px;
   }
 
@@ -46,5 +46,62 @@
     margin-bottom: 10px;
     height: 60px;
     background-color: #BAD8DD;
+  }
+}
+
+.bottom-buttons {
+  border: solid black 2px;
+  border-radius: 10px;
+  width: 99%;
+  height: 70px;
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #E3EFF1;
+
+  & button {
+    height: 80%;
+    width: 30%;
+    background-color: #BAD8DD;
+    border: solid rgb(180, 180, 180) 1px;
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: bold;
+
+    &:hover {
+      background-color: #75B1BC;
+      cursor: pointer;
+      border: solid black 1px;
+      transition: 0.3s;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .leaderboard {
+    height:40vh;
+    width: 90vw;
+
+    &-header {
+      & th {
+        font-size: 18px;
+        font-weight: bold;
+      }
+    }
+
+    tr:nth-child(even) { 
+      font-size: 12px;
+    }
+    tr:nth-child(odd) {
+      font-size: 12px;
+    }
+  }
+
+  .bottom-buttons {
+  
+    & button {
+      font-size: 15px;
+    }
   }
 }

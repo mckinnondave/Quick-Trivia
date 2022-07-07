@@ -8,6 +8,7 @@ import uniqueID from "../helpers/uniqueID";
 export default function Leaderboard({setLeaderboardVisible}) {
   const [listOfScores, setListOfScores] = useState([]);
   const [name, setName] = useState("");
+  const [showNameInputForm, setShowNameInputForm] = useState(false);
 
   const categorySelection = useContext(SelectionContext);
   const playerScore = useContext(ScoreContext);
@@ -36,10 +37,10 @@ export default function Leaderboard({setLeaderboardVisible}) {
 
   return (
     <>
-    <div className="leaderboard-title">
+    <div className="leaderboard-title animate__animated animate__bounceInLeft">
       Leaderboard
     </div>
-      <table className="leaderboard">
+      <table className="leaderboard animate__animated animate__bounceInRight">
         <thead className="leaderboard-header">
           <tr>
             <th>Rank</th>
@@ -62,7 +63,7 @@ export default function Leaderboard({setLeaderboardVisible}) {
         </tbody>
       </table>
 
-      <div>
+      <div className="bottom-buttons animate__animated animate__bounceInUp">
         {/* <input
           type="text"
           placeholder="name"
@@ -72,7 +73,7 @@ export default function Leaderboard({setLeaderboardVisible}) {
         /> */}
         <button onClick={() => setLeaderboardVisible(false)}>Back</button>
         <button onClick={() => window.location.reload(false)}>Play Again</button>
-        <button onClick={saveScore}>Submit Score</button>
+        <button onClick={() => setShowNameInputForm(true)}>Submit Score</button>
       </div>
     </>
   );
