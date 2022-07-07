@@ -31,15 +31,15 @@ export default function Leaderboard({setLeaderboardVisible}) {
         ...listOfScores,
         { name: name, category: categorySelection.label, score: playerScore },
       ]);
-      alert("Score Saved!");
+      setShowNameInputForm(false)
     });
   };
 
   return (
     <>
-    <div className="leaderboard-title animate__animated animate__bounceInLeft">
-      Leaderboard
-    </div>
+      <div className="leaderboard-title animate__animated animate__bounceInLeft">
+        Leaderboard
+      </div>
       <table className="leaderboard animate__animated animate__bounceInRight">
         <thead className="leaderboard-header">
           <tr>
@@ -62,17 +62,30 @@ export default function Leaderboard({setLeaderboardVisible}) {
           })}
         </tbody>
       </table>
-
-      <div className="bottom-buttons animate__animated animate__bounceInUp">
-        {/* <input
+      
+      {showNameInputForm &&
+        <div className="prompt-box animate__animated animate__zoomIn">
+        Please enter your name or initials below <b>Thanks for playing!</b>
+        <input
           type="text"
-          placeholder="name"
+          placeholder="Enter name here"
           onChange={(event) => {
             setName(event.target.value);
           }}
-        /> */}
+        />
+        <div className="prompt-box-btns">
+          <button onClick={() => saveScore()}>Submit</button>
+          <button onClick={() => setShowNameInputForm(false)}>Cancel</button>
+        </div>
+      </div>
+      }
+      
+
+      <div className="bottom-buttons animate__animated animate__bounceInUp">
         <button onClick={() => setLeaderboardVisible(false)}>Back</button>
-        <button onClick={() => window.location.reload(false)}>Play Again</button>
+        <button onClick={() => window.location.reload(false)}>
+          Play Again
+        </button>
         <button onClick={() => setShowNameInputForm(true)}>Submit Score</button>
       </div>
     </>
