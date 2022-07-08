@@ -102,10 +102,15 @@
     tr:nth-child(odd) {
       font-size: 12px;
     }
+
+    &-title {
+      height: 40px;
+      font-size: 30px;
+    }
   }
 
   .bottom-buttons {
-  
+    height: 50px;
     & button {
       font-size: 15px;
     }

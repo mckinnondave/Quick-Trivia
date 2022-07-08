@@ -58,11 +58,6 @@
       border-radius: 4px;
       background-color: #E3EFF1;
 
-      &:hover {
-        cursor: pointer;
-        background-color: #75B1BC;
-        transition: 0.3s;
-      }
     }
   }
 }
@@ -93,11 +88,30 @@
     &-btns {
 
       & button {
-        font-size: 15px;        
+        font-size: 15px;  
+        
+        &:active {
+          background-color: #75B1BC;
+        }
       }
     }
   }  
 }
 
+@media (min-width: 481px) {
+  .board {
+    &-btns {
+  
+      & button {
+  
+        &:hover {
+          cursor: pointer;
+          background-color: #75B1BC;
+          transition: 0.3s;
+        }
+      }
+    }
+  }
+}
 
 
