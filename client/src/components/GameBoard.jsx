@@ -5,6 +5,10 @@ import sortQuestion from "../helpers/Sorting";
 import "animate.css";
 import { useCountdownTimer } from "use-countdown-timer";
 import GameOver from "./GameOver";
+import useSound from 'use-sound'
+
+import correctSfx from '../sounds/correct.wav'
+import incorrectSfx from '../sounds/incorrect.wav'
 
 export const ScoreContext = React.createContext();
 
@@ -18,6 +22,8 @@ export default function GameBoard({ questions }) {
   const [questionScore, setQuestionScore] = useState(0);
   const [gameComplete, setGameComplete] = useState(false);
   const [disableButton, setDisableButton] = useState(false);
+  const [correctSound] = useSound(correctSfx)
+  const [incorrectSound] = useSound(incorrectSfx)
 
   // Countdown timer variables
   const { countdown, start, reset, pause } = useCountdownTimer({
@@ -71,6 +77,7 @@ export default function GameBoard({ questions }) {
     if (value === myQuestions[0].correctAnswer) {
       console.log("RIGHT!");
       setCorrectAnswerSelected(true);
+      correctSound()
       setCurrentQuestion(
         `CORRECT! The answer is "${myQuestions[0].correctAnswer}!"`
       );
@@ -81,6 +88,7 @@ export default function GameBoard({ questions }) {
     if (value !== myQuestions[0].correctAnswer) {
       console.log("WRONG");
       setFalseAnswerSelected(true);
+      incorrectSound()
       setCurrentQuestion(
         `Incorrect. The answer is "${myQuestions[0].correctAnswer}"`
       );
