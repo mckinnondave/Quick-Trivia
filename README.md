@@ -10,7 +10,7 @@ This app was created using React with the intention of improving my skills with 
 
 A user can select the category they want to test themselves in, and 10 questions will be randomly selected using a trivia [API](https://rapidapi.com/willrfry/api/trivia8/). When a user begins their game, a timer starts, and if they answer correctly, their score will increase based on how quick the user answered the question.
 
-This app is still a work-in-progress with plans to setup a back-end and create a leaderboard, and was most recently made mobile-friendly.
+I have most recently added a leaderboard to my game, with the front-end being hosted on Netlify and the back-end hosted on Heroku.
 
 Enjoy, and good luck!
 
@@ -21,4 +21,7 @@ Enjoy, and good luck!
 
 #### Game End
 ![](./trivia2.gif)
+
+#### Submitting Score
+![](./trivia3.gif)
 
