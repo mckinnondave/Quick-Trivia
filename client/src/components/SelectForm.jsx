@@ -4,8 +4,9 @@ import "./SelectForm.scss";
 import Select from "react-select";
 import GameBoard from "./GameBoard";
 import Leaderboard from "./Leaderboard";
+import Spinner from "./Spinner";
 
-export const SelectionContext = React.createContext()
+export const SelectionContext = React.createContext();
 
 const options = [
   { value: "arts_and_literature", label: "Arts & Literature" },
@@ -24,7 +25,8 @@ const options = [
 export default function SelectForm() {
   const [selectedOption, setSelectedOption] = useState(null);
   const [questions, setQuestions] = useState([]);
-  const [isFormHidden, setIsFormHidden] = useState(false)
+  const [isFormHidden, setIsFormHidden] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   // Prevent refresh and uses getListOfQuestions function to find questions
   function handleClick(e) {
@@ -34,7 +36,7 @@ export default function SelectForm() {
   }
 
   // Takes selected category from form and finds questions after submit button is clicked
-  const getListOfQuestions = async (category) => {
+  const getListOfQuestions = (category) => {
     const options = {
       method: "GET",
       url: "https://trivia8.p.rapidapi.com/api/questions",
@@ -44,11 +46,12 @@ export default function SelectForm() {
         "X-RapidAPI-Key": `${process.env.REACT_APP_API_KEY}`,
       },
     };
-    await axios
+    axios
       .request(options)
       .then(function (response) {
         console.log("DATA", response.data);
         setQuestions(response.data);
+        setIsLoading(false);
       })
       .catch(function (error) {
         console.error(error);
@@ -83,7 +86,7 @@ export default function SelectForm() {
             </div>
           </form>
         ) : (
-          <GameBoard questions={questions} />
+          <>{isLoading ? <Spinner /> : <GameBoard questions={questions} />}</>
         )}
       </SelectionContext.Provider>
     </>
