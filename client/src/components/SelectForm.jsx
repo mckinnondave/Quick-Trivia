@@ -4,6 +4,7 @@ import "./SelectForm.scss";
 import Select from "react-select";
 import GameBoard from "./GameBoard";
 import Spinner from "./Spinner";
+import GameOver from "./GameOver";
 
 export const SelectionContext = React.createContext();
 
@@ -62,6 +63,7 @@ export default function SelectForm() {
 
   return (
     <>
+    <GameOver />
       <SelectionContext.Provider value={selectedOption}>
         {!isFormHidden ? (
           <form
