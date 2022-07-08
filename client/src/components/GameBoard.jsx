@@ -6,7 +6,7 @@ import "animate.css";
 import { useCountdownTimer } from "use-countdown-timer";
 import GameOver from "./GameOver";
 
-export const ScoreContext = React.createContext()
+export const ScoreContext = React.createContext();
 
 export default function GameBoard({ questions }) {
   const [currentQuestion, setCurrentQuestion] = useState("");
@@ -17,7 +17,7 @@ export default function GameBoard({ questions }) {
   const [count, setCount] = useState(1);
   const [questionScore, setQuestionScore] = useState(0);
   const [gameComplete, setGameComplete] = useState(false);
-  // const [disableButton, setDisableButton] = useState(false)
+  const [disableButton, setDisableButton] = useState(false);
 
   // Countdown timer variables
   const { countdown, start, reset, pause } = useCountdownTimer({
@@ -41,7 +41,7 @@ export default function GameBoard({ questions }) {
     if (countdown === 0) {
       myQuestions.shift();
       setFalseAnswerSelected(true);
-      setCurrentQuestion("Timeup")
+      setCurrentQuestion("Timeup");
 
       setTimeout(() => {
         if (myQuestions.length !== 0) {
@@ -52,21 +52,19 @@ export default function GameBoard({ questions }) {
           setFalseAnswerSelected(false);
           start();
         }
-  
+
         if (myQuestions.length === 0) {
           console.log("Out of Questions!!");
           setFalseAnswerSelected(false);
           setGameComplete(true);
         }
       }, 3500);
-      
     }
   }, [start, countdown, reset, myQuestions, pause]);
 
   // Handles correct or incorrect answers and then resets for next question
   const handleAnswer = (value) => {
-
-    // setDisableButton(true)
+    setDisableButton(true);
     pause();
 
     // Handle correct answer
@@ -100,7 +98,7 @@ export default function GameBoard({ questions }) {
         setAnswers(sortQuestion(myQuestions[0]));
         setCorrectAnswerSelected(false);
         setFalseAnswerSelected(false);
-        // setDisableButton(false)
+        setDisableButton(false);
         start();
       } else {
         console.log("Out of Questions!!");
@@ -115,48 +113,57 @@ export default function GameBoard({ questions }) {
   const setFalseColor = falseAnswerSelected
     ? "wrong-answer animate__animated animate__shakeX"
     : "";
-  // const setDisabled = disableButton ? "disabled-btn" : "";
+  const setDisabled = disableButton ? "disabled-btn" : "";
 
   return (
     <>
-    <ScoreContext.Provider value={questionScore}>
-      {!gameComplete ? (
-        <>
-          <Scoreboard
-            countdown={countdown}
-            count={count}
-          />
-          <div className={`board ${setCorrectColor} ${setFalseColor} `}>
-            <div className="board-container ">
-              {!hideButton ? (
-                <div className="board-start animate__animated animate__fadeIn animate__delay-1s">
-                  <button onClick={handleClick}>Begin!</button>
-                </div>
-              ) : (
-                <>
-                  <div className="board-question ">{currentQuestion}</div>
-                  <div className="board-btns">
-                    <button /*className={`${setDisabled}`}*/ onClick={() => handleAnswer(answers[0])}>
-                      {answers[0]}
-                    </button>
-                    <button  /*className={`${setDisabled}`}*/  onClick={() => handleAnswer(answers[1])}>
-                      {answers[1]}
-                    </button>
-                    <button  /*className={`${setDisabled}`}*/  onClick={() => handleAnswer(answers[2])}>
-                      {answers[2]}
-                    </button>
-                    <button  /*className={`${setDisabled}`}*/  onClick={() => handleAnswer(answers[3])}>
-                      {answers[3]}
-                    </button>
+      <ScoreContext.Provider value={questionScore}>
+        {!gameComplete ? (
+          <>
+            <Scoreboard countdown={countdown} count={count} />
+            <div className={`board ${setCorrectColor} ${setFalseColor} `}>
+              <div className="board-container ">
+                {!hideButton ? (
+                  <div className="board-start animate__animated animate__fadeIn animate__delay-1s">
+                    <button onClick={handleClick}>Begin!</button>
                   </div>
-                </>
-              )}
+                ) : (
+                  <>
+                    <div className="board-question ">{currentQuestion}</div>
+                    <div className="board-btns">
+                      <button
+                        className={`${setDisabled}`}
+                        onClick={() => handleAnswer(answers[0])}
+                      >
+                        {answers[0]}
+                      </button>
+                      <button
+                        className={`${setDisabled}`}
+                        onClick={() => handleAnswer(answers[1])}
+                      >
+                        {answers[1]}
+                      </button>
+                      <button
+                        className={`${setDisabled}`}
+                        onClick={() => handleAnswer(answers[2])}
+                      >
+                        {answers[2]}
+                      </button>
+                      <button
+                        className={`${setDisabled}`}
+                        onClick={() => handleAnswer(answers[3])}
+                      >
+                        {answers[3]}
+                      </button>
+                    </div>
+                  </>
+                )}
+              </div>
             </div>
-          </div>
-        </>
-      ) : (
-        <GameOver />
-      )}
+          </>
+        ) : (
+          <GameOver />
+        )}
       </ScoreContext.Provider>
     </>
   );

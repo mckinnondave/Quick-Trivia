@@ -62,7 +62,6 @@ export default function SelectForm() {
 
   return (
     <>
-    <Spinner />
       <SelectionContext.Provider value={selectedOption}>
         {!isFormHidden ? (
           <form
