@@ -6,26 +6,34 @@ import { ScoreContext } from "./GameBoard";
 import uniqueID from "../helpers/uniqueID";
 import Spinner from "./Spinner";
 
-export default function Leaderboard({ setLeaderboardVisible }) {
+export default function Leaderboard({ setLeaderboardVisible, disableButton, setDisableButton }) {
   const [listOfScores, setListOfScores] = useState([]);
   const [name, setName] = useState("");
   const [showNameInputForm, setShowNameInputForm] = useState(false);
-  const [disableButton, setDisableButton] = useState(false);
   const [leaderboardLoading, setLeaderboardLoading] = useState(false);
 
   const categorySelection = useContext(SelectionContext);
   const playerScore = useContext(ScoreContext);
 
+  // Causes initial render of leaderboard and responsible for handling loading if waiting on Axios response
   useEffect(() => {
     setLeaderboardLoading(true);
-    Axios.get("https://trivia-react-game.herokuapp.com/getScores")
-      .then((response) => {
+    Axios.get("https://trivia-react-game.herokuapp.com/getScores").then(
+      (response) => {
         setListOfScores(response.data);
-      })
-      .then(function (response) {
         setLeaderboardLoading(false);
-      });
+      }
+    );
   }, []);
+
+  // Causes re-render of leaderboard when player adds their score
+  useEffect(() => {
+    Axios.get("https://trivia-react-game.herokuapp.com/getScores").then(
+      (response) => {
+        setListOfScores(response.data);
+      }
+    );
+  }, [listOfScores]);
 
   const saveScore = () => {
     setDisableButton(true);
@@ -42,7 +50,7 @@ export default function Leaderboard({ setLeaderboardVisible }) {
     });
   };
 
-  const setDisabled = disableButton ? "disabled-btn" : "";
+  const setDisabled = disableButton ? "disabled-leaderboard-btn" : "";
 
   return (
     <>
@@ -76,6 +84,7 @@ export default function Leaderboard({ setLeaderboardVisible }) {
             </tbody>
           </table>
 
+          {/* Score submit popup */}
           {showNameInputForm && (
             <div className="prompt-box animate__animated animate__zoomIn animate__faster">
               Please enter your name or initials below{" "}

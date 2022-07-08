@@ -5,6 +5,7 @@ import { ScoreContext } from "./GameBoard";
 
 export default function GameOver() {
   const [leaderboardVisible, setLeaderboardVisible] = useState(false)
+  const [disableButton, setDisableButton] = useState(false);
   const playerScore = useContext(ScoreContext);
 
   return (
@@ -36,7 +37,11 @@ export default function GameOver() {
           </div>
         </>
       ) : (
-        <Leaderboard setLeaderboardVisible={setLeaderboardVisible} />
+        <Leaderboard
+          setLeaderboardVisible={setLeaderboardVisible}
+          disableButton={disableButton}
+          setDisableButton={setDisableButton}
+        />
       )}
     </>
   );

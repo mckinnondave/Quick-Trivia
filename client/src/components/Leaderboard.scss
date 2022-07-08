@@ -78,6 +78,12 @@
   }
 }
 
+.disabled-leaderboard-btn {
+  pointer-events: none;
+  background: #E3EFF1 !important;
+  color: rgb(180, 180, 180);
+}
+
 @media (max-width: 480px) {
   .leaderboard {
     height:40vh;
