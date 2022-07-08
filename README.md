@@ -25,3 +25,14 @@ Enjoy, and good luck!
 #### Submitting Score
 ![](./trivia3.gif)
 
+### Stack
+
+- React
+- Node
+- Express
+- Sass
+- Axios
+- MongoDB
+- Netlify
+- Heroku
+
