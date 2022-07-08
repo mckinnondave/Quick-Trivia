@@ -21,6 +21,7 @@ export default function GameOver() {
                 <div className="gameover-score-text-bottom">{playerScore}</div>
               </div>
             </div>
+            Scores can be submitted on Leaderboard screen
             <div className="gameover-buttons">
               <button
                 className="gameover-buttons-left"

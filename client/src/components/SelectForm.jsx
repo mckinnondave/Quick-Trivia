@@ -3,7 +3,6 @@ import axios from "axios";
 import "./SelectForm.scss";
 import Select from "react-select";
 import GameBoard from "./GameBoard";
-import Leaderboard from "./Leaderboard";
 import Spinner from "./Spinner";
 
 export const SelectionContext = React.createContext();
@@ -37,6 +36,7 @@ export default function SelectForm() {
 
   // Takes selected category from form and finds questions after submit button is clicked
   const getListOfQuestions = (category) => {
+    setIsLoading(true)
     const options = {
       method: "GET",
       url: "https://trivia8.p.rapidapi.com/api/questions",

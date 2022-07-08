@@ -4,26 +4,31 @@ import Axios from "axios";
 import { SelectionContext } from "./SelectForm";
 import { ScoreContext } from "./GameBoard";
 import uniqueID from "../helpers/uniqueID";
+import Spinner from "./Spinner";
 
-export default function Leaderboard({setLeaderboardVisible}) {
+export default function Leaderboard({ setLeaderboardVisible }) {
   const [listOfScores, setListOfScores] = useState([]);
   const [name, setName] = useState("");
   const [showNameInputForm, setShowNameInputForm] = useState(false);
-  const [disableButton, setDisableButton] = useState(false)
+  const [disableButton, setDisableButton] = useState(false);
+  const [leaderboardLoading, setLeaderboardLoading] = useState(false);
 
   const categorySelection = useContext(SelectionContext);
   const playerScore = useContext(ScoreContext);
 
   useEffect(() => {
-    Axios.get("https://trivia-react-game.herokuapp.com/getScores").then(
-      (response) => {
+    setLeaderboardLoading(true);
+    Axios.get("https://trivia-react-game.herokuapp.com/getScores")
+      .then((response) => {
         setListOfScores(response.data);
-      }
-    );
-  }, [listOfScores]);
+      })
+      .then(function (response) {
+        setLeaderboardLoading(false);
+      });
+  }, []);
 
   const saveScore = () => {
-    setDisableButton(true)
+    setDisableButton(true);
     Axios.post("https://trivia-react-game.herokuapp.com/postScore", {
       name: name,
       category: categorySelection.label,
@@ -33,7 +38,7 @@ export default function Leaderboard({setLeaderboardVisible}) {
         ...listOfScores,
         { name: name, category: categorySelection.label, score: playerScore },
       ]);
-      setShowNameInputForm(false)
+      setShowNameInputForm(false);
     });
   };
 
@@ -41,57 +46,77 @@ export default function Leaderboard({setLeaderboardVisible}) {
 
   return (
     <>
-      <div className="leaderboard-title animate__animated animate__bounceInLeft">
-        Leaderboard
-      </div>
-      <table className="leaderboard animate__animated animate__bounceInRight">
-        <thead className="leaderboard-header">
-          <tr>
-            <th>Rank</th>
-            <th className="leaderboard-name">Name</th>
-            <th className="leaderboard-category">Category</th>
-            <th>Score</th>
-          </tr>
-        </thead>
-        <tbody>
-          {listOfScores.map((score, index) => {
-            return (
-              <tr key={uniqueID()}>
-                <th>{index + 1}</th>
-                <th className="leaderboard-name">{score.name}</th>
-                <th className="leaderboard-category">{score.category}</th>
-                <th>{score.score}</th>
+      {leaderboardLoading ? (
+        <Spinner />
+      ) : (
+        <>
+          <div className="leaderboard-title animate__animated animate__bounceInLeft">
+            Leaderboard
+          </div>
+          <table className="leaderboard animate__animated animate__bounceInRight">
+            <thead className="leaderboard-header">
+              <tr>
+                <th>Rank</th>
+                <th className="leaderboard-name">Name</th>
+                <th className="leaderboard-category">Category</th>
+                <th>Score</th>
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
-      
-      {showNameInputForm &&
-        <div className="prompt-box animate__animated animate__zoomIn animate__faster">
-        Please enter your name or initials below <b>Thanks for playing!</b>
-        <input
-          type="text"
-          placeholder="Enter name here"
-          onChange={(event) => {
-            setName(event.target.value);
-          }}
-        />
-        <div className="prompt-box-btn">
-          <button onClick={() => {saveScore(); setDisableButton(true)}}>Submit</button>
-          <button onClick={() => setShowNameInputForm(false)}>Cancel</button>
-        </div>
-      </div>
-      }
-      
+            </thead>
+            <tbody>
+              {listOfScores.map((score, index) => {
+                return (
+                  <tr key={uniqueID()}>
+                    <th>{index + 1}</th>
+                    <th className="leaderboard-name">{score.name}</th>
+                    <th className="leaderboard-category">{score.category}</th>
+                    <th>{score.score}</th>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
 
-      <div className="bottom-buttons animate__animated animate__bounceInUp">
-        <button onClick={() => setLeaderboardVisible(false)}>Back</button>
-        <button onClick={() => window.location.reload(false)}>
-          Play Again
-        </button>
-        <button className={`${setDisabled}`} onClick={() => setShowNameInputForm(true)}>Submit Score</button>
-      </div>
+          {showNameInputForm && (
+            <div className="prompt-box animate__animated animate__zoomIn animate__faster">
+              Please enter your name or initials below{" "}
+              <b>Thanks for playing!</b>
+              <input
+                type="text"
+                placeholder="Enter name here"
+                onChange={(event) => {
+                  setName(event.target.value);
+                }}
+              />
+              <div className="prompt-box-btn">
+                <button
+                  onClick={() => {
+                    saveScore();
+                    setDisableButton(true);
+                  }}
+                >
+                  Submit
+                </button>
+                <button onClick={() => setShowNameInputForm(false)}>
+                  Cancel
+                </button>
+              </div>
+            </div>
+          )}
+
+          <div className="bottom-buttons animate__animated animate__bounceInUp">
+            <button onClick={() => setLeaderboardVisible(false)}>Back</button>
+            <button onClick={() => window.location.reload(false)}>
+              Play Again
+            </button>
+            <button
+              className={`${setDisabled}`}
+              onClick={() => setShowNameInputForm(true)}
+            >
+              Submit Score
+            </button>
+          </div>
+        </>
+      )}
     </>
   );
 }
