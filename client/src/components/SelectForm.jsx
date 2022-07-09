@@ -6,7 +6,7 @@ import GameBoard from "./GameBoard";
 import Spinner from "./Spinner";
 import useSound from 'use-sound'
 import buttonSfx from '../sounds/button.wav'
-import {Howl, Howler} from 'howler'
+import {Howl} from 'howler'
 import electroSwing from '../sounds/electroSwing.mp3'
 
 export const SelectionContext = React.createContext();
@@ -91,6 +91,7 @@ export default function SelectForm() {
                   defaultValue={selectedOption}
                   onChange={setSelectedOption}
                   options={options}
+                  isSearchable={ false }
                 />
               </div>
               <button className="select-form-btn" onClick={handleClick}>

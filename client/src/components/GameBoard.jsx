@@ -80,7 +80,7 @@ export default function GameBoard({ questions, buttonSound, mainTheme }) {
       setCorrectAnswerSelected(true);
       correctSound()
       setCurrentQuestion(
-        `CORRECT! The answer is "${myQuestions[0].correctAnswer}!"`
+        `CORRECT! The answer is "${myQuestions[0].correctAnswer.trim()}"`
       );
       setQuestionScore((prev) => prev + (countdown / 100) * 1.5);
     }

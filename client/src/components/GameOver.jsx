@@ -14,7 +14,7 @@ export default function GameOver({ buttonSound, mainTheme }) {
 
   useEffect(() => {
     mainTheme.fade(0.2, 0.5, 1000)
-  }, [])
+  }, [mainTheme])
  
   return (
     <>
