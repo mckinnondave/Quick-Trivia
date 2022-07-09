@@ -13,7 +13,7 @@ export default function GameOver({ buttonSound, mainTheme }) {
   const playerScore = useContext(ScoreContext);
 
   useEffect(() => {
-    mainTheme.fade(0.2, 0.5, 1000)
+    mainTheme.fade(0.1, 0.5, 1000)
   }, [mainTheme])
  
   return (

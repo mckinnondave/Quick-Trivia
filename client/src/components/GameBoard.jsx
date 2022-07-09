@@ -40,7 +40,7 @@ export default function GameBoard({ questions, buttonSound, mainTheme }) {
     setCurrentQuestion(myQuestions[0].question);
     setAnswers(sortQuestion(myQuestions[0]));
     start();
-    mainTheme.fade(0.5, 0.2, 1000)
+    mainTheme.fade(0.5, 0.1, 1000)
   };
 
   // Handles situation where no answer is selected
