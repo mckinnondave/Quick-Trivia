@@ -77,7 +77,6 @@ export default function GameBoard({ questions, buttonSound, mainTheme }) {
 
     // Handle correct answer
     if (value === myQuestions[0].correctAnswer) {
-      console.log("RIGHT!");
       setCorrectAnswerSelected(true);
       correctSound()
       setCurrentQuestion(
@@ -88,7 +87,6 @@ export default function GameBoard({ questions, buttonSound, mainTheme }) {
 
     // Handle incorrect answer
     if (value !== myQuestions[0].correctAnswer) {
-      console.log("WRONG");
       setFalseAnswerSelected(true);
       incorrectSound()
       setCurrentQuestion(
@@ -111,7 +109,6 @@ export default function GameBoard({ questions, buttonSound, mainTheme }) {
         setDisableButton(false);
         start();
       } else {
-        console.log("Out of Questions!!");
         setGameComplete(true);
       }
     }, 3500);
