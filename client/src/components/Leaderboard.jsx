@@ -13,7 +13,7 @@ export default function Leaderboard({ setLeaderboardVisible, disableButton, setD
   const [name, setName] = useState("");
   const [showNameInputForm, setShowNameInputForm] = useState(false);
   const [leaderboardLoading, setLeaderboardLoading] = useState(false);
-  const [savedSound] = useSound(savedSfx, {volume: 0.5})
+  const [savedSound] = useSound(savedSfx)
 
   const categorySelection = useContext(SelectionContext);
   const playerScore = useContext(ScoreContext);

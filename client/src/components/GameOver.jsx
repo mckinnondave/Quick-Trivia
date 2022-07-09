@@ -4,12 +4,17 @@ import Leaderboard from "./Leaderboard";
 import { ScoreContext } from "./GameBoard";
 import useSound from 'use-sound'
 import cheerSfx from '../sounds/cheers.wav'
+import { useEffect } from "react";
 
-export default function GameOver({ buttonSound }) {
+export default function GameOver({ buttonSound, mainTheme }) {
   const [leaderboardVisible, setLeaderboardVisible] = useState(false)
   const [disableButton, setDisableButton] = useState(false);
   const [cheerSound] = useSound(cheerSfx, {volume: 0.5})
   const playerScore = useContext(ScoreContext);
+
+  useEffect(() => {
+    mainTheme.fade(0.2, 0.5, 1000)
+  }, [])
  
   return (
     <>

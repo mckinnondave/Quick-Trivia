@@ -11,7 +11,7 @@ import incorrectSfx from '../sounds/incorrect.wav'
 
 export const ScoreContext = React.createContext();
 
-export default function GameBoard({ questions, buttonSound }) {
+export default function GameBoard({ questions, buttonSound, mainTheme }) {
   const [currentQuestion, setCurrentQuestion] = useState("");
   const [answers, setAnswers] = useState([]);
   const [correctAnswerSelected, setCorrectAnswerSelected] = useState(false);
@@ -40,6 +40,7 @@ export default function GameBoard({ questions, buttonSound }) {
     setCurrentQuestion(myQuestions[0].question);
     setAnswers(sortQuestion(myQuestions[0]));
     start();
+    mainTheme.fade(0.5, 0.2, 1000)
   };
 
   // Handles situation where no answer is selected
@@ -170,7 +171,7 @@ export default function GameBoard({ questions, buttonSound }) {
             </div>
           </>
         ) : (
-          <GameOver buttonSound={buttonSound} />
+          <GameOver buttonSound={buttonSound} mainTheme={mainTheme}/>
         )}
       </ScoreContext.Provider>
     </>

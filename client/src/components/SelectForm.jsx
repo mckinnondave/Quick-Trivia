@@ -6,6 +6,8 @@ import GameBoard from "./GameBoard";
 import Spinner from "./Spinner";
 import useSound from 'use-sound'
 import buttonSfx from '../sounds/button.wav'
+import {Howl, Howler} from 'howler'
+import electroSwing from '../sounds/electroSwing.mp3'
 
 export const SelectionContext = React.createContext();
 
@@ -22,13 +24,19 @@ const options = [
   { value: "sport_and_leisure", label: "Sport & Leisure" },
 ];
 
+let mainTheme = new Howl({
+  src: [electroSwing],
+  volume: 0.5,
+  loop: true
+})
+
 // Involved with selecting the category and calling for questions
 export default function SelectForm() {
   const [selectedOption, setSelectedOption] = useState(null);
   const [questions, setQuestions] = useState([]);
   const [isFormHidden, setIsFormHidden] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [buttonSound] = useSound(buttonSfx, {volume: 0.8})
+  const [buttonSound] = useSound(buttonSfx)
 
   // Prevent refresh and uses getListOfQuestions function to find questions
   function handleClick(e) {
@@ -36,6 +44,7 @@ export default function SelectForm() {
     getListOfQuestions(selectedOption.value);
     setIsFormHidden(true);
     buttonSound();
+    mainTheme.play()
   }
 
   // Takes selected category from form and finds questions after submit button is clicked
@@ -90,7 +99,7 @@ export default function SelectForm() {
             </div>
           </form>
         ) : (
-          <>{isLoading ? <Spinner /> : <GameBoard questions={questions} buttonSound={buttonSound}/>}</>
+          <>{isLoading ? <Spinner /> : <GameBoard questions={questions} buttonSound={buttonSound} mainTheme={mainTheme} />}</>
         )}
       </SelectionContext.Provider>
     </>
