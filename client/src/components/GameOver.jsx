@@ -9,7 +9,7 @@ import { useEffect } from "react";
 export default function GameOver({ buttonSound, mainTheme }) {
   const [leaderboardVisible, setLeaderboardVisible] = useState(false)
   const [disableButton, setDisableButton] = useState(false);
-  const [cheerSound] = useSound(cheerSfx, {volume: 0.5})
+  const [cheerSound] = useSound(cheerSfx, {volume: 0.7})
   const playerScore = useContext(ScoreContext);
 
   useEffect(() => {
