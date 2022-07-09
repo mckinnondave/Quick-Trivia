@@ -6,13 +6,12 @@ import "animate.css";
 import { useCountdownTimer } from "use-countdown-timer";
 import GameOver from "./GameOver";
 import useSound from 'use-sound'
-
 import correctSfx from '../sounds/correct.wav'
 import incorrectSfx from '../sounds/incorrect.wav'
 
 export const ScoreContext = React.createContext();
 
-export default function GameBoard({ questions }) {
+export default function GameBoard({ questions, buttonSound }) {
   const [currentQuestion, setCurrentQuestion] = useState("");
   const [answers, setAnswers] = useState([]);
   const [correctAnswerSelected, setCorrectAnswerSelected] = useState(false);
@@ -36,6 +35,7 @@ export default function GameBoard({ questions }) {
   // Prepares gameboard for first question - hides begin button, selects first question, and starts the timer
   const handleClick = (e) => {
     e.preventDefault();
+    buttonSound();
     setHideButton(true);
     setCurrentQuestion(myQuestions[0].question);
     setAnswers(sortQuestion(myQuestions[0]));
@@ -170,7 +170,7 @@ export default function GameBoard({ questions }) {
             </div>
           </>
         ) : (
-          <GameOver />
+          <GameOver buttonSound={buttonSound} />
         )}
       </ScoreContext.Provider>
     </>

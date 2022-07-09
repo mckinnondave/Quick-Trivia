@@ -4,6 +4,8 @@ import "./SelectForm.scss";
 import Select from "react-select";
 import GameBoard from "./GameBoard";
 import Spinner from "./Spinner";
+import useSound from 'use-sound'
+import buttonSfx from '../sounds/button.wav'
 
 export const SelectionContext = React.createContext();
 
@@ -26,12 +28,14 @@ export default function SelectForm() {
   const [questions, setQuestions] = useState([]);
   const [isFormHidden, setIsFormHidden] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [buttonSound] = useSound(buttonSfx, {volume: 0.5})
 
   // Prevent refresh and uses getListOfQuestions function to find questions
   function handleClick(e) {
     e.preventDefault();
     getListOfQuestions(selectedOption.value);
     setIsFormHidden(true);
+    buttonSound();
   }
 
   // Takes selected category from form and finds questions after submit button is clicked
@@ -86,7 +90,7 @@ export default function SelectForm() {
             </div>
           </form>
         ) : (
-          <>{isLoading ? <Spinner /> : <GameBoard questions={questions} />}</>
+          <>{isLoading ? <Spinner /> : <GameBoard questions={questions} buttonSound={buttonSound}/>}</>
         )}
       </SelectionContext.Provider>
     </>

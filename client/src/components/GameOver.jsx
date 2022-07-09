@@ -2,14 +2,18 @@ import "./GameOver.scss";
 import React, { useContext, useState } from "react";
 import Leaderboard from "./Leaderboard";
 import { ScoreContext } from "./GameBoard";
+import useSound from 'use-sound'
+import cheerSfx from '../sounds/cheers.wav'
 
-export default function GameOver() {
+export default function GameOver({ buttonSound }) {
   const [leaderboardVisible, setLeaderboardVisible] = useState(false)
   const [disableButton, setDisableButton] = useState(false);
+  const [cheerSound] = useSound(cheerSfx, {volume: 0.3})
   const playerScore = useContext(ScoreContext);
-
+ 
   return (
     <>
+      {!leaderboardVisible && cheerSound()}
       {!leaderboardVisible ? (
         <>
           <div className="gameover-text animate__animated animate__zoomInDown animate__slow">
@@ -26,11 +30,11 @@ export default function GameOver() {
             <div className="gameover-buttons">
               <button
                 className="gameover-buttons-left"
-                onClick={() => window.location.reload(false)}
+                onClick={() => {buttonSound(); window.location.reload(false)}}
               >
                 Play Again
               </button>
-              <button onClick={() => setLeaderboardVisible(true)}>
+              <button onClick={() => {setLeaderboardVisible(true); buttonSound()}}>
                 Leaderboard
               </button>
             </div>
@@ -41,6 +45,7 @@ export default function GameOver() {
           setLeaderboardVisible={setLeaderboardVisible}
           disableButton={disableButton}
           setDisableButton={setDisableButton}
+          buttonSound={buttonSound}
         />
       )}
     </>

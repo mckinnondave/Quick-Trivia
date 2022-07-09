@@ -5,12 +5,15 @@ import { SelectionContext } from "./SelectForm";
 import { ScoreContext } from "./GameBoard";
 import uniqueID from "../helpers/uniqueID";
 import Spinner from "./Spinner";
+import useSound from 'use-sound'
+import savedSfx from '../sounds/saved.wav'
 
-export default function Leaderboard({ setLeaderboardVisible, disableButton, setDisableButton }) {
+export default function Leaderboard({ setLeaderboardVisible, disableButton, setDisableButton, buttonSound }) {
   const [listOfScores, setListOfScores] = useState([]);
   const [name, setName] = useState("");
   const [showNameInputForm, setShowNameInputForm] = useState(false);
   const [leaderboardLoading, setLeaderboardLoading] = useState(false);
+  const [savedSound] = useSound(savedSfx, {volume: 0.5})
 
   const categorySelection = useContext(SelectionContext);
   const playerScore = useContext(ScoreContext);
@@ -101,11 +104,12 @@ export default function Leaderboard({ setLeaderboardVisible, disableButton, setD
                   onClick={() => {
                     saveScore();
                     setDisableButton(true);
+                    savedSound();
                   }}
                 >
                   Submit
                 </button>
-                <button onClick={() => setShowNameInputForm(false)}>
+                <button onClick={() => {setShowNameInputForm(false); buttonSound()}}>
                   Cancel
                 </button>
               </div>
@@ -113,13 +117,13 @@ export default function Leaderboard({ setLeaderboardVisible, disableButton, setD
           )}
 
           <div className="bottom-buttons animate__animated animate__bounceInUp">
-            <button onClick={() => setLeaderboardVisible(false)}>Back</button>
-            <button onClick={() => window.location.reload(false)}>
+            <button onClick={() => {setLeaderboardVisible(false); buttonSound()}}>Back</button>
+            <button onClick={() => {buttonSound(); window.location.reload(false)}}>
               Play Again
             </button>
             <button
               className={`${setDisabled}`}
-              onClick={() => setShowNameInputForm(true)}
+              onClick={() => {setShowNameInputForm(true); buttonSound()}}
             >
               Submit Score
             </button>
