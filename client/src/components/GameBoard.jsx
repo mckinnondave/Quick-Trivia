@@ -48,7 +48,8 @@ export default function GameBoard({ questions, buttonSound, mainTheme }) {
     if (countdown === 0) {
       myQuestions.shift();
       setFalseAnswerSelected(true);
-      setCurrentQuestion("Timeup");
+      setCurrentQuestion("Time Up");
+      incorrectSound();
 
       setTimeout(() => {
         if (myQuestions.length !== 0) {
