@@ -12,6 +12,7 @@ export default function GameOver({ buttonSound, mainTheme }) {
   const [cheerSound] = useSound(cheerSfx, {volume: 0.7})
   const playerScore = useContext(ScoreContext);
 
+  // Dial background sound up once game is complete
   useEffect(() => {
     mainTheme.fade(0.1, 0.5, 1000)
   }, [mainTheme])

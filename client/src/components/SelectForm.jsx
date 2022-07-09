@@ -24,6 +24,7 @@ const options = [
   { value: "sport_and_leisure", label: "Sport & Leisure" },
 ];
 
+// Background music
 let mainTheme = new Howl({
   src: [electroSwing],
   volume: 0.5,
@@ -62,7 +63,6 @@ export default function SelectForm() {
     axios
       .request(options)
       .then(function (response) {
-        console.log("DATA", response.data);
         setQuestions(response.data);
         setIsLoading(false);
       })
