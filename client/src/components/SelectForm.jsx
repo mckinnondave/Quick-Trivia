@@ -28,7 +28,7 @@ export default function SelectForm() {
   const [questions, setQuestions] = useState([]);
   const [isFormHidden, setIsFormHidden] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [buttonSound] = useSound(buttonSfx, {volume: 0.5})
+  const [buttonSound] = useSound(buttonSfx, {volume: 0.8})
 
   // Prevent refresh and uses getListOfQuestions function to find questions
   function handleClick(e) {

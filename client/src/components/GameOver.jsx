@@ -8,7 +8,7 @@ import cheerSfx from '../sounds/cheers.wav'
 export default function GameOver({ buttonSound }) {
   const [leaderboardVisible, setLeaderboardVisible] = useState(false)
   const [disableButton, setDisableButton] = useState(false);
-  const [cheerSound] = useSound(cheerSfx, {volume: 0.3})
+  const [cheerSound] = useSound(cheerSfx, {volume: 0.5})
   const playerScore = useContext(ScoreContext);
  
   return (
