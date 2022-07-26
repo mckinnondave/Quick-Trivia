@@ -68,7 +68,7 @@ export default function GameBoard({ questions, buttonSound, mainTheme }) {
         }
       }, 3500);
     }
-  }, [start, countdown, reset, myQuestions, pause]);
+  }, [start, countdown, reset, myQuestions, pause, incorrectSound]);
 
   // Handles correct or incorrect answers and then resets for next question
   const handleAnswer = (value) => {

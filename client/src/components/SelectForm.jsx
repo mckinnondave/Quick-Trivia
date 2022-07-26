@@ -74,7 +74,7 @@ export default function SelectForm() {
   const hideForm = isFormHidden ? "select-form-hide" : "";
 
   return (
-    <>
+    <div data-testid="selectForm-1">
       <SelectionContext.Provider value={selectedOption}>
         {!isFormHidden ? (
           <form
@@ -103,6 +103,6 @@ export default function SelectForm() {
           <>{isLoading ? <Spinner /> : <GameBoard questions={questions} buttonSound={buttonSound} mainTheme={mainTheme} />}</>
         )}
       </SelectionContext.Provider>
-    </>
+    </div>
   );
 }
